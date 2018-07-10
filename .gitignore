@@ -1,0 +1,12 @@
+node_modules/
+.idea/
+*.log
+build/
+dist/
+public/assets/
+/coverage
+**/*.txt
+**/*.xml
+**/*.svg
+dll/
+.DS_Store
