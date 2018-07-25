@@ -142,7 +142,7 @@ const config = {
 				ignoreCustomComments: envDev ? false : [ /^!/ ]
 			}
 		})
-	],
-
+	]
 }
+
 module.exports = config;

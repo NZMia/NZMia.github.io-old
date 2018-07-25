@@ -10,3 +10,4 @@ public/assets/
 **/*.svg
 dll/
 .DS_Store
+package-lock.json

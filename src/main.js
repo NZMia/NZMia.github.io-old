@@ -1,20 +1,21 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { HashRouter } from 'react-router-dom'
-import Routers from './pages'
-import 'main.scss'
+import React from 'react';
+import ReactDOM  from 'react-dom';
+import { HashRouter } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
+import { routes } from './router/router';
+import 'main.scss';
 
 class App extends React.Component {
 	render() {
 		return (
 			<HashRouter>
-				<Routers />
+				{renderRoutes(routes)}
 			</HashRouter>
 		)
 	}
 }
 
-render(<App/>, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'));
 
 if (module.hot) {
 	module.hot.accept()

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dll": "cross-env NODE_ENV=development webpack -p --config ./configs/webpack.dll.config.js",
+    "dll": "rimraf dll && cross-env NODE_ENV=development webpack -p --config ./configs/webpack.dll.config.js",
     "start": "cross-env NODE_ENV=development node bin/start",
     "build": "npm run clean && cross-env NODE_ENV=development node ./bin/build.js",
     "clean": "rimraf dist"
@@ -52,6 +52,7 @@
     "hoek": "^5.0.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.3.1"
   }
 }
