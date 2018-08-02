@@ -1,0 +1,28 @@
+/* main color */
+$color_iron: #4B4C53;
+$color_gold: #EFA52E;
+$color_pineapple: #F2CF4B;
+$color_eggNog: #F8DC8B;
+$color_cinnamon: #653623;
+
+/* color for main color match */
+$color_iron_light: #949599;
+$color_gold_light: #7E5925;
+$color_pineapple_light: #806F31;
+$color_eggNog_light: #84774D;
+$color_cinnamon_light: #A1887E;
+$color_white: #FFF;
+
+$colors: (
+        'iron': $color_iron,
+        'gold': $color_gold,
+        'pineapple': $color_pineapple,
+        'eggNog': $color_eggNog,
+        'cinnamon': $color_cinnamon,
+        'ironLight': $color_iron_light,
+        'goldLight': $color_gold_light,
+        'pineappleLight': $color_pineapple_light,
+        'eggNogLight': $color_eggNog_light,
+        'cinnamonLight': $color_cinnamon_light,
+        'white': $color_white
+)

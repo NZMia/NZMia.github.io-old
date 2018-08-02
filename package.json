@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dll": "rimraf dll && cross-env NODE_ENV=development webpack -p --config ./configs/webpack.dll.config.js",
-    "start": "cross-env NODE_ENV=development node bin/start",
+    "start": "cross-env NODE_ENV=production node bin/start",
     "build": "npm run clean && cross-env NODE_ENV=development node ./bin/build.js",
+    "prod": "npm run clean && cross-env NODE_ENV=production node ./bin/build.js",
     "clean": "rimraf dist"
   },
   "author": "",

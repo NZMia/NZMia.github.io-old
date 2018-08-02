@@ -1,0 +1,145 @@
+@import "_color.scss";
+
+/*-------------------------------*/
+/*            Function           */
+/*-------------------------------*/
+
+/**
+ * function for `number` convert. eg: 100px -> 100
+ * $number - type: number. eg: 100px, 100vw, 100...
+ */
+@function strip-unit($number) {
+
+  @if type-of($number) == "number" and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+/**
+ * function for `string` replacement
+ * $source     - type: string. eg: 'Mia is awesome'
+ * $subStr     - type: string. eg: 'Mia'
+ * $replaceStr - type: string. eg: 'Wanying'
+ */
+@function str-replace($source, $subStr, $replaceStr, $fail-silently: false) {
+
+  $start: str-index($source, $subStr);
+
+  @if $start {
+
+    @return str-slice($source, 1, $start - 1)  + $replaceStr + str-slice($source, $start + str-length($subStr))
+  }
+
+  @if $fail-silently {
+
+    @return $source;
+  } @else {
+
+    @error "'#{$subStr}' was not found in '#{$source}'";
+  }
+
+}
+/*-------------------------------*/
+/*            Mixin              */
+/*-------------------------------*/
+
+
+/**
+ * $list   - type: dictionary. eg: $colors;
+ * $attr   - type: string. eg: 'background'. ps: css attributes
+ * $prefix - type: string. eg: '-'. ps: optional
+ */
+@mixin class-generate($list, $attr, $isFontList, $prefix...) {
+
+  @each $key, $value in $list {
+
+    @if($isFontList){
+
+      @font-face {
+
+        #{$attr}: $key;
+        src: $value format("opentype");
+      }
+    }
+    @else {
+
+      &#{$prefix}#{$key} {
+
+        #{$attr}: $value;
+
+        @if($attr == 'border-color') {
+
+          @include button-class($value);
+        }
+      }
+    }
+  }
+}
+
+@mixin button-class($value) {
+
+  border-width: 1px;
+  border-style: solid;
+
+  &:hover, &:active, &:focus {
+
+    background-color: $value;
+
+    @if($value != #fff) {
+
+      color: #fff;
+      border: 1px solid $value;
+    } @else {
+
+      border: 1px solid $color_burn;
+      color: $color_burn;
+    }
+  }
+}
+
+/**
+ * $properties - type: string/string list. eg: 'padding-bottom'
+ * $min-vw     - type: number. eg: '320px'.  ps: min view width
+ * $max-vw     - type: number. eg: '1800px'. ps: max view width
+ * $min-value  - type: number. eg: '15px'.   ps: can be considered as min font size/ width ...
+ * $max-value  - type: number. eg: '32px'.   ps: can be considered as max font size/ width ...
+ */
+@mixin responsive-type($properties, $min-vw, $max-vw, $min-value, $max-value) {
+
+  @each $property in $properties {
+
+    #{$property}: $min-value;
+  }
+
+  @media (min-width: $min-vw) {
+
+    @each $property in $properties {
+
+      #{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)});
+    }
+  }
+
+  @media (min-width: $max-vw) {
+
+    @each $property in $properties {
+
+      #{$property}: $max-value;
+    }
+  }
+}
+
+/**
+ * $key   - type: string. eg: 'display'.
+ * $value - type: css value . eg: flex.
+ */
+@mixin auto-prefix($key, $value) {
+
+  -webkit-#{$key}: $value;
+  -moz-#{$key}: $value;
+  -ms-#{$key}: $value;
+  -o-#{$key}: $value;
+  #{$key}: $value;
+}
+

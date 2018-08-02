@@ -58,6 +58,9 @@ const config = {
 					MiniCssExtractPlugin.loader,
 					{
 						loader : 'css-loader',
+						options: {
+							minimize: envDev? false : true
+						}
 					},
 					{
 						loader: 'postcss-loader',
@@ -97,17 +100,11 @@ const config = {
 					priority: -10,
 					enforce : true
 				},
-				components: {
-					name  : 'components',
-					test  : /common\/|components\//,
-					chunks  : 'all',
-					enforce : true
-				},
 				styles: {
 					name   : 'main',
 					test   : /[\\/]main.scss[\\/]/,
 					chunks : 'all',
-					enforce: true,
+					enforce: true
 				}
 			}
 		}
@@ -120,12 +117,13 @@ const config = {
 	plugins: [
 		new webpack.DllReferencePlugin({
 			context : project.basePath,
-			manifest: path.resolve(project.basePath, '../dll', 'manifest.json')
+			manifest: path.resolve(project.basePath, '../dll', 'manifest.json'),
+
 		}),
 
 		new MiniCssExtractPlugin({
-			filename: envDev ? '[name].css' : '[name].[hash].css',
-			chunkFilename: envDev ? '[id].css' : '[id].[hash].css',
+			filename: envDev ? '[name].css' : '[name].[chunkhash:5].css',
+			chunkFilename: envDev ? '[id].css' : '[id].[chunkhash:5].css',
 		}),
 
 		new CopyWebpackPlugin([{

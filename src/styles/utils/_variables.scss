@@ -1,0 +1,157 @@
+@import "_mixin.scss";
+
+/*-------------------------------*/
+/*       Default root value      */
+/*-------------------------------*/
+
+$max-vw: 1710px;
+$min-vw: 320px;
+
+$default-font-value: 12px;
+
+$default-min-space: 20px;
+$default-max-space: 32px;
+
+/*-------------------------------*/
+/*          screen size          */
+/*-------------------------------*/
+
+$max1024: "(max-width: 1024px)";
+$max992: "(max-width: 992px)";
+$max768: "(max-width: 768px)";
+$max720: "(max-width: 720px)";
+$max414: "(max-width: 414px)";
+
+/*-------------------------------*/
+/*           Flex style          */
+/*-------------------------------*/
+
+.mia-flex {
+  @include auto-prefix('display', flex);
+}
+
+.mia-flex-row {
+  @include auto-prefix('flex-direction', row);
+}
+
+.mia-flex-column {
+
+  @include auto-prefix('flex-direction', column);
+}
+
+.mia-flex-spaceAround {
+
+  @include auto-prefix('justify-content', space-around);
+}
+
+.mia-flex-spaceBetween {
+
+  @include auto-prefix('justify-content', space-between);
+}
+
+.mia-flex-spaceEvenly {
+
+  @include auto-prefix('justify-content', space-evenly);
+}
+
+.mia-flex-start {
+
+  @include auto-prefix('justify-content', flex-start);
+}
+
+.mia-flex-end {
+
+  @include auto-prefix('justify-content', flex-end);
+}
+
+.mia-flex-center {
+  @include auto-prefix('justify-content', center);
+  @include auto-prefix('align-items', center);
+}
+
+.mia-flex-horizontal-center {
+  @include auto-prefix('align-items', center);
+}
+
+.mia-flex-bottom-align {
+  @include auto-prefix('align-items', flex-end);
+}
+
+.mia-flex-row-reverse {
+
+  @include auto-prefix('flex-direction', row-reverse);
+}
+
+.mia-flex-baseline {
+
+  @include auto-prefix('align-items', baseline);
+}
+.mia-inner-space {
+  @include responsive-type('padding', $min-vw, $max-vw, $default-min-space, 25px);
+}
+
+.mia-inner-space-top {
+
+  @include responsive-type('padding-top', $min-vw, $max-vw, $default-min-space, 25px);
+}
+.mia-inner-space-bottom {
+
+  @include responsive-type('padding-bottom', $min-vw, $max-vw, $default-min-space, 25px);
+}
+.mia-inner-space-left {
+
+  @include responsive-type('padding-left', $min-vw, $max-vw, $default-min-space, 25px);
+}
+.mia-inner-space-right {
+
+  @include responsive-type('padding-right', $min-vw, $max-vw, $default-min-space, 25px);
+}
+.showItem {
+  display: block;
+}
+
+.hideItem {
+  display: none;
+}
+
+/*-------------------------------*/
+/*            Background         */
+/*-------------------------------*/
+
+.mia-background {
+  @include class-generate($colors,'background-color', false, '-');
+}
+
+/*-------------------------------*/
+/*        General Variables      */
+/*-------------------------------*/
+
+
+.singleTextElipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+.multiLineTextElipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  //display: box;
+  line-clamp: 4;
+  orient: vertical;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+
+
+  display: -moz-box;
+  -moz-line-clamp: 4;
+  -moz-box-orient: vertical;
+
+  display: -o-box;
+  -o-line-clamp: 4;
+  -o-box-orient: vertical;
+}
