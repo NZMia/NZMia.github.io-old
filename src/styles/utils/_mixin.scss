@@ -10,11 +10,11 @@
  */
 @function strip-unit($number) {
 
-  @if type-of($number) == "number" and not unitless($number) {
-    @return $number / ($number * 0 + 1);
-  }
+    @if type-of($number) == "number" and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
 
-  @return $number;
+    @return $number;
 }
 
 /**
@@ -25,20 +25,20 @@
  */
 @function str-replace($source, $subStr, $replaceStr, $fail-silently: false) {
 
-  $start: str-index($source, $subStr);
+    $start: str-index($source, $subStr);
 
-  @if $start {
+    @if $start {
 
-    @return str-slice($source, 1, $start - 1)  + $replaceStr + str-slice($source, $start + str-length($subStr))
-  }
+        @return str-slice($source, 1, $start - 1)  + $replaceStr + str-slice($source, $start + str-length($subStr))
+    }
 
-  @if $fail-silently {
+    @if $fail-silently {
 
-    @return $source;
-  } @else {
+        @return $source;
+    } @else {
 
-    @error "'#{$subStr}' was not found in '#{$source}'";
-  }
+        @error "'#{$subStr}' was not found in '#{$source}'";
+    }
 
 }
 /*-------------------------------*/
@@ -53,50 +53,48 @@
  */
 @mixin class-generate($list, $attr, $isFontList, $prefix...) {
 
-  @each $key, $value in $list {
+    @each $key, $value in $list {
 
-    @if($isFontList){
+        @if($isFontList){
 
-      @font-face {
+            @font-face {
 
-        #{$attr}: $key;
-        src: $value format("opentype");
-      }
-    }
-    @else {
-
-      &#{$prefix}#{$key} {
-
-        #{$attr}: $value;
-
-        @if($attr == 'border-color') {
-
-          @include button-class($value);
+            #{$attr}: $key;
+            src: $value format("opentype");
+            }
         }
-      }
+        @else {
+
+            &#{$prefix}#{$key} {
+
+                #{$attr}: $value;
+
+                @if($attr == 'border-color') {
+
+                  @include button-class($value);
+                }
+            }
+        }
     }
-  }
 }
 
 @mixin button-class($value) {
 
-  border-width: 1px;
-  border-style: solid;
+    border-width: 1px;
+    border-style: solid;
 
-  &:hover, &:active, &:focus {
+    &:hover, &:active, &:focus {
 
-    background-color: $value;
+        background-color: $value;
 
-    @if($value != #fff) {
-
-      color: #fff;
-      border: 1px solid $value;
-    } @else {
-
-      border: 1px solid $color_burn;
-      color: $color_burn;
+        @if($value != #fff) {
+            color: #fff;
+            border: 1px solid $value;
+        } @else {
+            border: 1px solid $color_burn;
+            color: $color_burn;
+        }
     }
-  }
 }
 
 /**
@@ -108,26 +106,24 @@
  */
 @mixin responsive-type($properties, $min-vw, $max-vw, $min-value, $max-value) {
 
-  @each $property in $properties {
-
-    #{$property}: $min-value;
-  }
-
-  @media (min-width: $min-vw) {
-
     @each $property in $properties {
-
-      #{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)});
+        #{$property}: $min-value;
     }
-  }
 
-  @media (min-width: $max-vw) {
+    @media (min-width: $min-vw) {
 
-    @each $property in $properties {
+        @each $property in $properties {
 
-      #{$property}: $max-value;
+            #{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)});
+            }
+        }
+
+    @media (min-width: $max-vw) {
+
+        @each $property in $properties {
+            #{$property}: $max-value;
+        }
     }
-  }
 }
 
 /**
@@ -136,10 +132,9 @@
  */
 @mixin auto-prefix($key, $value) {
 
-  -webkit-#{$key}: $value;
-  -moz-#{$key}: $value;
-  -ms-#{$key}: $value;
-  -o-#{$key}: $value;
-  #{$key}: $value;
+    -webkit-#{$key}: $value;
+    -moz-#{$key}: $value;
+    -ms-#{$key}: $value;
+    -o-#{$key}: $value;
+    #{$key}: $value;
 }
-

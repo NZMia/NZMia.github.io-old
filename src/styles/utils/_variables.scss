@@ -27,91 +27,83 @@ $max414: "(max-width: 414px)";
 /*-------------------------------*/
 
 .mia-flex {
-  @include auto-prefix('display', flex);
+    @include auto-prefix('display', flex);
 }
 
 .mia-flex-row {
-  @include auto-prefix('flex-direction', row);
+    @include auto-prefix('flex-direction', row);
 }
 
 .mia-flex-column {
-
-  @include auto-prefix('flex-direction', column);
+    @include auto-prefix('flex-direction', column);
 }
 
 .mia-flex-spaceAround {
-
-  @include auto-prefix('justify-content', space-around);
+    @include auto-prefix('justify-content', space-around);
 }
 
 .mia-flex-spaceBetween {
-
-  @include auto-prefix('justify-content', space-between);
+    @include auto-prefix('justify-content', space-between);
 }
 
 .mia-flex-spaceEvenly {
-
-  @include auto-prefix('justify-content', space-evenly);
+    @include auto-prefix('justify-content', space-evenly);
 }
 
 .mia-flex-start {
-
-  @include auto-prefix('justify-content', flex-start);
+    @include auto-prefix('justify-content', flex-start);
 }
 
 .mia-flex-end {
-
-  @include auto-prefix('justify-content', flex-end);
+    @include auto-prefix('justify-content', flex-end);
 }
 
 .mia-flex-center {
-  @include auto-prefix('justify-content', center);
-  @include auto-prefix('align-items', center);
+    @include auto-prefix('justify-content', center);
+    @include auto-prefix('align-items', center);
 }
 
 .mia-flex-horizontal-center {
-  @include auto-prefix('align-items', center);
+    @include auto-prefix('align-items', center);
 }
 
 .mia-flex-bottom-align {
-  @include auto-prefix('align-items', flex-end);
+    @include auto-prefix('align-items', flex-end);
 }
 
 .mia-flex-row-reverse {
-
-  @include auto-prefix('flex-direction', row-reverse);
+    @include auto-prefix('flex-direction', row-reverse);
 }
 
 .mia-flex-baseline {
-
-  @include auto-prefix('align-items', baseline);
+    @include auto-prefix('align-items', baseline);
 }
+
 .mia-inner-space {
-  @include responsive-type('padding', $min-vw, $max-vw, $default-min-space, 25px);
+    @include responsive-type('padding', $min-vw, $max-vw, $default-min-space, 25px);
 }
 
 .mia-inner-space-top {
-
-  @include responsive-type('padding-top', $min-vw, $max-vw, $default-min-space, 25px);
+    @include responsive-type('padding-top', $min-vw, $max-vw, $default-min-space, 25px);
 }
+
 .mia-inner-space-bottom {
-
-  @include responsive-type('padding-bottom', $min-vw, $max-vw, $default-min-space, 25px);
+    @include responsive-type('padding-bottom', $min-vw, $max-vw, $default-min-space, 25px);
 }
+
 .mia-inner-space-left {
-
-  @include responsive-type('padding-left', $min-vw, $max-vw, $default-min-space, 25px);
+    @include responsive-type('padding-left', $min-vw, $max-vw, $default-min-space, 25px);
 }
-.mia-inner-space-right {
 
-  @include responsive-type('padding-right', $min-vw, $max-vw, $default-min-space, 25px);
+.mia-inner-space-right {
+    @include responsive-type('padding-right', $min-vw, $max-vw, $default-min-space, 25px);
 }
 .showItem {
-  display: block;
+    display: block;
 }
 
 .hideItem {
-  display: none;
+    display: none;
 }
 
 /*-------------------------------*/
@@ -119,7 +111,7 @@ $max414: "(max-width: 414px)";
 /*-------------------------------*/
 
 .mia-background {
-  @include class-generate($colors,'background-color', false, '-');
+    @include class-generate($colors,'background-color', false, '-');
 }
 
 /*-------------------------------*/
@@ -128,30 +120,30 @@ $max414: "(max-width: 414px)";
 
 
 .singleTextElipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: break-word;
 }
 
 .multiLineTextElipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
-  //display: box;
-  line-clamp: 4;
-  orient: vertical;
+    //display: box;
+    line-clamp: 4;
+    orient: vertical;
 
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
 
 
-  display: -moz-box;
-  -moz-line-clamp: 4;
-  -moz-box-orient: vertical;
+    display: -moz-box;
+    -moz-line-clamp: 4;
+    -moz-box-orient: vertical;
 
-  display: -o-box;
-  -o-line-clamp: 4;
-  -o-box-orient: vertical;
+    display: -o-box;
+    -o-line-clamp: 4;
+    -o-box-orient: vertical;
 }

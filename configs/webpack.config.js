@@ -14,133 +14,133 @@ const SRC_DIR = path.join(project.basePath, project.srcDir);
 
 const config = {
 
-	mode: project.env,
+    mode: project.env,
 
-	entry:{
-		main: [SRC_DIR + '/main.js']
-	},
+    entry:{
+        main: [SRC_DIR + '/main.js']
+    },
 
-	output: {
-		path: path.resolve(project.basePath, project.outDir),
-		filename: envDev ? '[name].js' : '[name].[chunkhash:5].js',
-		publicPath: project.publicPath
-	},
+    output: {
+        path: path.resolve(project.basePath, project.outDir),
+        filename: envDev ? '[name].js' : '[name].[chunkhash:5].js',
+        publicPath: project.publicPath
+    },
 
-	devtool: devtool,
+    devtool: devtool,
 
-	resolve: {
-		modules: [
-			project.srcDir,
-			'node_modules'
-		],
+    resolve: {
+        modules: [
+            project.srcDir,
+            'node_modules'
+        ],
 
-		alias: {
-			'src': SRC_DIR
-		},
+        alias: {
+            'src': SRC_DIR
+        },
 
-		extensions: ['*','.js', '.jsx', '.json', '.less', '.scss', '.css']
-	},
+        extensions: ['*','.js', '.jsx', '.json', '.less', '.scss', '.css']
+    },
 
-	module: {
-		rules: [
-			{
-				test: /(\.jsx|\.js)$/,
-				use : {
-					loader: 'babel-loader?cacheDirectory'
-				},
-				include: SRC_DIR,
-				exclude: /node_modules/
-			},
-			{
-				test:/\.(sa|sc|c)ss$/,
-				use :[
+    module: {
+        rules: [
+            {
+                test: /(\.jsx|\.js)$/,
+                use : {
+                    loader: 'babel-loader?cacheDirectory'
+                },
+                include: SRC_DIR,
+                exclude: /node_modules/
+            },
+            {
+                test:/\.(sa|sc|c)ss$/,
+                use :[
 
-					MiniCssExtractPlugin.loader,
-					{
-						loader : 'css-loader',
-						options: {
-							minimize: envDev? false : true
-						}
-					},
-					{
-						loader: 'postcss-loader',
-						options: {
-							config: {
-								path: path.join(project.basePath, 'postcss.config.js')
-							}
-						}
-					},
-					{
-						loader: 'sass-loader'
-					}
-				]
-			},
-			{
-				test    : /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-				loader  : 'url-loader',
-				options : {
-					limit     : 10000,
-					outputPath: "images"
-				}
-			}
-		]
-	},
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader : 'css-loader',
+                        options: {
+                            minimize: envDev? false : true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            config: {
+                                path: path.join(project.basePath, 'postcss.config.js')
+                            }
+                        }
+                    },
+                    {
+                        loader: 'sass-loader'
+                    }
+                ]
+            },
+            {
+                test    : /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader  : 'url-loader',
+                options : {
+                    limit     : 10000,
+                    outputPath: "images"
+                }
+            }
+        ]
+    },
 
-	optimization: {
-		sideEffects: false,
-		splitChunks: {
-			chunks     :'all',
-			minSize    : 30000,
-			minChunks  : 1,
-			cacheGroups: {
-				commons: {
-					name    : 'thirdParty',
-					test    : /[\\/]node_modules[\\/]/,
-					chunks  : 'initial',
-					priority: -10,
-					enforce : true
-				},
-				styles: {
-					name   : 'main',
-					test   : /[\\/]main.scss[\\/]/,
-					chunks : 'all',
-					enforce: true
-				}
-			}
-		}
-	},
+    optimization: {
+        sideEffects: false,
+        splitChunks: {
+            chunks     :'all',
+            minSize    : 30000,
+            minChunks  : 1,
+            cacheGroups: {
+                commons: {
+                    name    : 'thirdParty',
+                    test    : /[\\/]node_modules[\\/]/,
+                    chunks  : 'initial',
+                    priority: -10,
+                    enforce : true
+                },
+                styles: {
+                    name   : 'main',
+                    test   : /[\\/]main.scss[\\/]/,
+                    chunks : 'all',
+                    enforce: true
+                }
+            }
+        }
+    },
 
-	performance: {
-		hints: false
-	},
+    performance: {
+        hints: false
+    },
 
-	plugins: [
-		new webpack.DllReferencePlugin({
-			context : project.basePath,
-			manifest: path.resolve(project.basePath, '../dll', 'manifest.json'),
+    plugins: [
+        new webpack.DllReferencePlugin({
+            context : project.basePath,
+            manifest: path.resolve(project.basePath, '../dll', 'manifest.json'),
 
-		}),
+        }),
 
-		new MiniCssExtractPlugin({
-			filename: envDev ? '[name].css' : '[name].[chunkhash:5].css',
-			chunkFilename: envDev ? '[id].css' : '[id].[chunkhash:5].css',
-		}),
+        new MiniCssExtractPlugin({
+            filename: envDev ? '[name].css' : '[name].[chunkhash:5].css',
+            chunkFilename: envDev ? '[id].css' : '[id].[chunkhash:5].css',
+        }),
 
-		new CopyWebpackPlugin([{
-			from : path.join(project.basePath,'../dll'),
-			to   : path.join(project.basePath,'../dist','dll')
-		}]),
+        new CopyWebpackPlugin([{
+            from : path.join(project.basePath,'../dll'),
+            to   : path.join(project.basePath,'../dist','dll')
+        }]),
 
-		new HtmlWebpackPlugin({
-			template : 'src/index.html',
-			inject   : true,
-			favicon  : path.resolve('favicon.ico'),
-			minify   : {
-				collapseWhitespace: envDev? false : true,
-				ignoreCustomComments: envDev ? false : [ /^!/ ]
-			}
-		})
-	]
+        new HtmlWebpackPlugin({
+            template : 'src/index.html',
+            inject   : true,
+            favicon  : path.resolve('favicon.ico'),
+            minify   : {
+                collapseWhitespace: envDev? false : true,
+                ignoreCustomComments: envDev ? false : [ /^!/ ]
+            }
+        })
+    ]
 }
 
 module.exports = config;
