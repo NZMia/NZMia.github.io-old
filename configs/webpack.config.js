@@ -77,13 +77,13 @@ const config = {
             },
             {
                 test    : /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-	            use: [{
-                	loader: "url-loader",
-		            options : {
-			            limit: 8192,
-			            name: 'images/[name].[hash:5].[ext]'
-		            }
-	            }]
+                use: [{
+                    loader: "url-loader",
+                    options : {
+                        limit: 8192,
+                        name: 'images/[name].[hash:5].[ext]'
+                    }
+                }]
             }
         ]
     },
