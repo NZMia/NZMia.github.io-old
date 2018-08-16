@@ -10,7 +10,7 @@ module.exports = {
 
     output: {
         path: path.resolve(project.basePath, '../dll'),
-        filename: '[name].dll.[hash:5].js',
+        filename: '[name].[hash:5].dll.js',
         library: '[name]_library'
     },
 
