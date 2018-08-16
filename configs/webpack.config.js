@@ -1,9 +1,8 @@
-
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 const project = require('./project.config');
 
@@ -11,14 +10,12 @@ const envDev = project.env === 'development';
 const devtool = project.sourceMap ? 'cheap-source-map' : false;
 
 const SRC_DIR = path.join(project.basePath, project.srcDir);
-const DLL_DIR = path.join(project.basePath, project.dllDir);
 const config = {
 
     mode: project.env,
 
     entry:{
         main: [SRC_DIR + '/main.js'],
-        vendor: [DLL_DIR + '/vendor.dll.js']
     },
 
     output: {
@@ -137,6 +134,11 @@ const config = {
                 collapseWhitespace: envDev? false : true,
                 ignoreCustomComments: envDev ? false : [ /^!/ ]
             }
+        }),
+
+        new AddAssetHtmlPlugin({
+            filepath: path.resolve(project.basePath, '../dll/*.dll.js'),
+            includeSourcemap: false
         })
     ]
 }
