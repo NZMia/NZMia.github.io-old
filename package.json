@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dll": "rimraf dll && cross-env NODE_ENV=development webpack -p --config ./configs/webpack.dll.config.js",
-    "start": "cross-env NODE_ENV=production node bin/start",
+    "start": "cross-env NODE_ENV=development node bin/start",
     "build": "npm run clean && cross-env NODE_ENV=development node ./bin/build.js",
     "prod": "npm run clean && cross-env NODE_ENV=production node ./bin/build.js",
     "clean": "rimraf dist"
@@ -48,8 +48,14 @@
   },
   "dependencies": {
     "@babel/preset-env": "^7.0.0-beta.51",
+    "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
+    "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
+    "@fortawesome/react-fontawesome": "0.1.0-11",
     "express": "^4.16.3",
     "hoek": "^5.0.3",
+    "i": "^0.3.6",
+    "json-loader": "^0.5.7",
+    "npm": "^6.3.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router-config": "^1.0.0-beta.4",
