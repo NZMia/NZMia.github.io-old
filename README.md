@@ -1,7 +1,7 @@
 Personal Project Refactor
 ------
 This is for `react` + `express` project
-Local port; 9000
+Local port: ./configs/project.config.js
 
 #### Quick start
 --------

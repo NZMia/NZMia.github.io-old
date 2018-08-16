@@ -11,13 +11,14 @@ const envDev = project.env === 'development';
 const devtool = project.sourceMap ? 'cheap-source-map' : false;
 
 const SRC_DIR = path.join(project.basePath, project.srcDir);
-
+const DLL_DIR = path.join(project.basePath, project.dllDir);
 const config = {
 
     mode: project.env,
 
     entry:{
-        main: [SRC_DIR + '/main.js']
+        main: [SRC_DIR + '/main.js'],
+        vendor: [DLL_DIR + '/vendor.dll.js']
     },
 
     output: {
@@ -76,7 +77,7 @@ const config = {
                 ]
             },
             {
-                test    : /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 use: [{
                     loader: "url-loader",
                     options : {
@@ -124,14 +125,9 @@ const config = {
         }),
 
         new MiniCssExtractPlugin({
-            filename: envDev ? '[name].css' : '[name].[chunkhash:5].css',
-            chunkFilename: envDev ? '[id].css' : '[id].[chunkhash:5].css',
+            filename: envDev ? '[name].css' : '[name].[hash:5].css',
+            chunkFilename: envDev ? '[id].css' : '[id].[hash:5].css',
         }),
-
-        new CopyWebpackPlugin([{
-            from : path.join(project.basePath,'../dll'),
-            to   : path.join(project.basePath,'../dist','dll')
-        }]),
 
         new HtmlWebpackPlugin({
             template : 'src/index.html',
