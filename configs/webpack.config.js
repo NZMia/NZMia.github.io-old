@@ -33,7 +33,8 @@ const config = {
         ],
 
         alias: {
-            'src': SRC_DIR
+            '@': SRC_DIR,
+	        '@assets': path.resolve(project.basePath, project.srcDir, 'assets')
         },
 
         extensions: ['*','.js', '.jsx', '.json', '.less', '.scss', '.css']
@@ -53,7 +54,12 @@ const config = {
                 test:/\.(sa|sc|c)ss$/,
                 use :[
 
-                    MiniCssExtractPlugin.loader,
+	                {
+	                	loader: MiniCssExtractPlugin.loader,
+		                options: {
+			                publicPath: project.publicPath
+		                }
+	                },
                     {
                         loader : 'css-loader',
                         options: {

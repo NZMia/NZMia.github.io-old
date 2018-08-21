@@ -1,0 +1,34 @@
+@import "../utils/index";
+
+.component-nav {
+
+    position: fixed;
+    left: 0;
+    right: 0;
+    max-width: $max-vw;
+    margin: 0 auto;
+    z-index: 99;
+    background-color: $color_lightGrey;
+    @include auto-prefix('transition', transform .7s ease-in-out);
+    @include responsive-type('padding-top' 'padding-bottom' 'padding-right', $min-vw, $max-vw, 15px, 20px);
+
+    li {
+        list-style-type:none;
+        @include responsive-type('padding-left' 'padding-right', $min-vw, $max-vw, 15px, 20px);
+        a {
+            color: $color_lightBrown;
+            text-decoration: none;
+            font-weight: 700;
+        }
+    }
+}
+
+.stickyNav {
+    @include auto-prefix('justify-content', space-evenly !important);
+    opacity: 0.9;
+}
+
+.end {
+    position: relative;
+    opacity: 1;
+}

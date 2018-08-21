@@ -1,2 +1,7 @@
 @import "components/index.scss";
-@import "utils/index";
+@import "utils/index.scss";
+
+body {
+    padding: 0;
+    margin: 0;
+}
