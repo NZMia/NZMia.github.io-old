@@ -4,14 +4,15 @@
 /*       Default root value      */
 /*-------------------------------*/
 
-$max-vw: 1710px;
+$max-vw: 1800px;
 $min-vw: 320px;
 
 $default-font-value: 12px;
 
 $default-min-space: 20px;
-$default-max-space: 32px;
+$default-max-space: 30px;
 
+$default-space: 15px;
 /*-------------------------------*/
 /*          screen size          */
 /*-------------------------------*/
@@ -26,78 +27,79 @@ $max414: "(max-width: 414px)";
 /*           Flex style          */
 /*-------------------------------*/
 
-.mia-flex {
+.flex {
     @include auto-prefix('display', flex);
 }
 
-.mia-flex-row {
+.flex-row {
     @include auto-prefix('flex-direction', row);
 }
 
-.mia-flex-column {
+.flex-column {
     @include auto-prefix('flex-direction', column);
 }
 
-.mia-flex-spaceAround {
+.flex-spaceAround {
     @include auto-prefix('justify-content', space-around);
 }
 
-.mia-flex-spaceBetween {
+.flex-spaceBetween {
     @include auto-prefix('justify-content', space-between);
 }
 
-.mia-flex-spaceEvenly {
+.flex-spaceEvenly {
     @include auto-prefix('justify-content', space-evenly);
 }
 
-.mia-flex-start {
+.flex-start {
     @include auto-prefix('justify-content', flex-start);
 }
 
-.mia-flex-end {
+.flex-end {
     @include auto-prefix('justify-content', flex-end);
 }
 
-.mia-flex-center {
+.flex-center {
     @include auto-prefix('justify-content', center);
     @include auto-prefix('align-items', center);
 }
 
-.mia-flex-horizontal-center {
+.flex-horizontal-center {
     @include auto-prefix('align-items', center);
 }
 
-.mia-flex-bottom-align {
+.flex-bottom-align {
     @include auto-prefix('align-items', flex-end);
 }
 
-.mia-flex-row-reverse {
+.flex-row-reverse {
     @include auto-prefix('flex-direction', row-reverse);
 }
 
-.mia-flex-baseline {
+.flex-baseline {
     @include auto-prefix('align-items', baseline);
 }
 
-.mia-inner-space {
-    @include responsive-type('padding', $min-vw, $max-vw, $default-min-space, 25px);
+.padding {
+    @include responsive-type('padding', $min-vw, $max-vw, $default-space, 25px);
 }
 
-.mia-inner-space-top {
-    @include responsive-type('padding-top', $min-vw, $max-vw, $default-min-space, 25px);
+.padding-top {
+    padding-top: $default-space;
 }
 
-.mia-inner-space-bottom {
-    @include responsive-type('padding-bottom', $min-vw, $max-vw, $default-min-space, 25px);
+.padding-bottom {
+    padding-bottom: $default-space;
 }
 
-.mia-inner-space-left {
-    @include responsive-type('padding-left', $min-vw, $max-vw, $default-min-space, 25px);
+.padding-left {
+    padding-left: $default-space;
 }
 
-.mia-inner-space-right {
-    @include responsive-type('padding-right', $min-vw, $max-vw, $default-min-space, 25px);
+.padding-right {
+    padding-right: $default-space;
 }
+
 .showItem {
     display: block;
 }
@@ -110,8 +112,16 @@ $max414: "(max-width: 414px)";
 /*            Background         */
 /*-------------------------------*/
 
-.mia-background {
+.background {
     @include class-generate($colors,'background-color', false, '-');
+}
+
+/*-------------------------------*/
+/*             Text              */
+/*-------------------------------*/
+
+.text {
+  @include class-generate($colors,'color', false, '-');
 }
 
 /*-------------------------------*/
@@ -130,7 +140,7 @@ $max414: "(max-width: 414px)";
     overflow: hidden;
     text-overflow: ellipsis;
 
-    //display: box;
+    display: box;
     line-clamp: 4;
     orient: vertical;
 

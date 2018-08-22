@@ -1,0 +1,40 @@
+{
+    "courses": [
+        {
+            "ID": "1316",
+            "name": "Pīkau 1: He Whakatakinga",
+            "coverImageUrl": "https://iqfy-storage.imgix.net/hu0HKTfLT2GO5Omv63Qo_untitled.png?w=146&h=146&fit=crop",
+            "link": "https://kiatakatu.iqualify.com/course/-LFQawLziZmFtFAXTCiX"
+        },
+        {
+            "ID": "1317",
+            "name": "Pīkau 2: Hangarau Matihiko i Te Marautanga o Aotearoa",
+            "coverImageUrl": "https://iqfy-storage.imgix.net/v00AYrAXQwqcfNI03GSP_untitled.png?w=146&h=146&fit=crop",
+            "link": "https://kiatakatu.iqualify.com/course/-LFQan3_Y-XDCa_iHXvY"
+        },
+        {
+            "ID": "1318",
+            "name": "Pīkau 1: He Whakatakinga",
+            "coverImageUrl": "https://iqfy-storage.imgix.net/hu0HKTfLT2GO5Omv63Qo_untitled.png?w=146&h=146&fit=crop",
+            "link": "https://kiatakatu.iqualify.com/course/-LFQawLziZmFtFAXTCiX"
+        },
+        {
+            "ID": "1319",
+            "name": "Pīkau 2: Hangarau Matihiko i Te Marautanga o Aotearoa",
+            "coverImageUrl": "https://iqfy-storage.imgix.net/v00AYrAXQwqcfNI03GSP_untitled.png?w=146&h=146&fit=crop",
+            "link": "https://kiatakatu.iqualify.com/course/-LFQan3_Y-XDCa_iHXvY"
+        },
+        {
+            "ID": "1320",
+            "name": "Pīkau 1: He Whakatakinga",
+            "coverImageUrl": "https://iqfy-storage.imgix.net/hu0HKTfLT2GO5Omv63Qo_untitled.png?w=146&h=146&fit=crop",
+            "link": "https://kiatakatu.iqualify.com/course/-LFQawLziZmFtFAXTCiX"
+        },
+        {
+            "ID": "1321",
+            "name": "Pīkau 2: Hangarau Matihiko i Te Marautanga o Aotearoa",
+            "coverImageUrl": "https://iqfy-storage.imgix.net/v00AYrAXQwqcfNI03GSP_untitled.png?w=146&h=146&fit=crop",
+            "link": "https://kiatakatu.iqualify.com/course/-LFQan3_Y-XDCa_iHXvY"
+        }
+    ]
+}

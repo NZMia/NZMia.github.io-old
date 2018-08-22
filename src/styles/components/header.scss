@@ -1,0 +1,14 @@
+@import "../utils/index";
+
+header {
+    background: url(~@assets/images/headerGif.gif) repeat fixed;
+    background-size: auto;
+    position: relative;
+    height: 300px;
+
+    & > div {
+        border-top: 3px solid $color_silver;
+        border-bottom: 3px solid $color_silver;
+        @include responsive-type('padding', $min-vw, $max-vw, $default-space,50px);
+    }
+}

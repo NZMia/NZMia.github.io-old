@@ -9,10 +9,13 @@ class Header extends Component {
             name: this.props.name
         }
     }
+
     render() {
         return (
-            <header>
-                <h1>Hollow state {this.state.name} , props {this.props.name} </h1>
+            <header className="flex flex-center">
+                <div className="headerWrapper">
+                     <h1 className="text-lightBrown"> {this.state.name} Dashboard </h1>
+                </div>
             </header>
         )
     }

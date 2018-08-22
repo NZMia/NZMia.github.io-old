@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Header from '../components/header';
+import Footer from '../components/footer';
+
 
 class Home extends Component {
 
@@ -13,7 +15,9 @@ class Home extends Component {
 
     render() {
         return (
-            <Header name={"Mia"}></Header>
+            <div className="siteContent page-home">
+                home pageeeeeee
+            </div>
         )
     }
 }
