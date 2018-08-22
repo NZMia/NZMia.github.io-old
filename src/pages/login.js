@@ -12,7 +12,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div>login</div>
+            <div className="siteContent">login</div>
         )
     }
 }

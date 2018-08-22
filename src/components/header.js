@@ -13,9 +13,9 @@ class Header extends Component {
     render() {
         return (
             <header className="flex flex-center">
-	            <div className="headerWrapper">
-		             <h1 className="text-lightBrown"> {this.state.name} Dashboard </h1>
-	            </div>
+                <div className="headerWrapper">
+                     <h1 className="text-lightBrown"> {this.state.name} Dashboard </h1>
+                </div>
             </header>
         )
     }

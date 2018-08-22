@@ -5,32 +5,20 @@ import About from '../pages/about';
 export const routes = [
     { path: '/',
         exact: true,
-	    name: 'Home',
+        name: 'Home',
         component: Home,
-	    routes: [
-		    {
-			    path: "/home/test1",
-			    name: 'Home11',
-
-		    },
-		    {
-			    path: "/home/test2",
-			    name: 'Home22',
-
-		    }
-	    ],
         requiresAuth: false,
     },
     {
         path: '/login',
-	    name: 'Login',
+        name: 'Login',
         component: Login,
         requiresAuth: false,
 
     },
     {
         path: '/about',
-	    name: 'About',
+        name: 'About',
         component: About,
         requiresAuth: true,
 
