@@ -1,0 +1,43 @@
+@import "../utils/index";
+
+footer {
+
+    background-color: $color_lightGrey;
+    @include responsive-type('padding', $min-vw, $max-vw, 15px, 20px);
+    color: $color_lightBrown;
+
+    .footer-wrapper {
+        width: 100%;
+    }
+
+    .social-link {
+
+        a {
+            display: inline-block;
+            height: 25px;
+            width: 25px;
+
+            &:not(:last-child):not(:first-child) {
+                @include responsive-type('margin-left' 'margin-right', $min-vw, $max-vw, 20px, 35px);
+            }
+        }
+    }
+
+    .social-link, .show-interest, .up-coming {
+        @include auto-prefix('align-items', center);
+        @include auto-prefix('flex', 0 0 33.3333%);
+        max-width: 33.3333%;
+        min-height: 80px;
+    }
+
+    .social-link, .show-interest {
+        border-right: 1px solid $color_silver;
+    }
+
+    .content-wrapper {
+
+        border-top: 1px solid $color_silver;
+        @include responsive-type('padding', $min-vw, $max-vw, 15px, 20px);
+        @include responsive-type('margin-top', $min-vw, $max-vw, 15px, 20px);
+    }
+}

@@ -7,7 +7,6 @@ public/assets/
 /coverage
 **/*.txt
 **/*.xml
-**/*.svg
 dll/
 .DS_Store
 package-lock.json

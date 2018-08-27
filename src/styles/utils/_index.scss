@@ -1,2 +1,18 @@
 @import "./_typography.scss";
 @import "./_color.scss";
+
+$widthSize: 1, 2, 3, 4, 5;
+
+.wrapper {
+    margin: 0 auto;
+    max-width: $max-vw;
+    position: relative;
+}
+
+.component {
+    @include width-generate($widthSize,'width','-')
+}
+
+.component-width-auto {
+    @include auto-prefix('flex', 1);
+}

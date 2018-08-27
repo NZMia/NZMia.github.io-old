@@ -1,43 +1,43 @@
 @import "_variables.scss";
 @import "_color.scss";
 
-.mia-text {
+.text {
     @include class-generate($colors,'color', false, '-');
 }
 //
-//.mia-text-extraBold {
+//.text-extraBold {
 //  font-family: "CerebriSans-ExtraBold", sans-serif;
 //}
 //
-//.mia-text-bold {
+//.text-bold {
 //  font-family: "CerebriSans-Bold", sans-serif;
 //}
 //
-//.mia-text-semiBold {
+//.text-semiBold {
 //  font-family: "CerebriSans-SemiBold", sans-serif;
 //}
 //
-//.mia-text-medium {
+//.text-medium {
 //  font-family: "CerebriSans-Medium", sans-serif;
 //}
 //
-//.mia-text-regular {
+//.text-regular {
 //  font-family: "CerebriSans-Regular", sans-serif;
 //}
 //
-//.mia-text-light, .mia-text-thin {
+//.text-light, .text-thin {
 //  font-family: "CerebriSans-Light", sans-serif;
 //}
 
-.mia-text-left {
+.text-left {
     text-align: left;
 }
 
-.mia-text-right {
+.text-right {
     text-align: right;
 }
 
-.mia-text-center {
+.text-center {
     text-align: center;
 }
 
@@ -45,29 +45,30 @@ h1, h2, h3, h4, h5 , h6 {
   //font-family: "CerebriSans-ExtraBold", sans-serif;
     line-height: 1.2;
     margin-top: 0;
+    margin-bottom: 0;
 }
 
-h1, .mia-size-32 {
+h1, .size-32 {
     @include responsive-type('font-size', $min-vw, $max-vw, 32px, 48px);
 }
 
-h2, .mia-size-28 {
+h2, .size-28 {
     @include responsive-type('font-size', $min-vw, $max-vw, 24px, 44px);
 }
 
-h3, .mia-size-24 {
+h3, .size-24 {
     @include responsive-type('font-size', $min-vw, $max-vw, 16px, 28px);
 }
 
-h4, .mia-size-20 {
+h4, .size-20 {
     @include responsive-type('font-size', $min-vw, $max-vw, 14px, 16px);
 }
 
-h5, .mia-size-16 {
+h5, .size-16 {
     @include responsive-type('font-size', $min-vw, $max-vw, 12px, 14px);
 }
 
-h6, .mia-size-12 {
+h6, .size-12 {
     @include responsive-type('font-size', $min-vw, $max-vw, 10px, 12px);
 }
 

@@ -138,3 +138,25 @@
     -o-#{$key}: $value;
     #{$key}: $value;
 }
+
+/**
+ * $list   - type: number list. eg: '1,2,3...'.
+ * $attr - type: css value . eg: width.
+ * $prefix - connector
+ */
+@mixin width-generate($list, $attr, $prefix...) {
+
+    $maxItemNum: max($list...);
+
+    @each $value in $list {
+
+        $max-value:  $value*(100%/$maxItemNum);
+
+        &#{$prefix}#{$attr}#{$prefix}#{$value} {
+
+            max-#{$attr}: $max-value;
+            @include auto-prefix('flex', 0 0 $max-value);
+            //@include responsive-type('padding', $min-vw, $max-vw, $default-space, $default-space);
+        }
+    }
+}
