@@ -1,16 +1,18 @@
 @import "./styles/index";
 
-.mainContent {
-
-    position: relative;
-    max-width: $max-vw;
-    min-width: $min-vw;
-    min-height: 100vh;
-    @include auto-prefix('display', flex);
-    @include auto-prefix('flex-direction', column);
-
-    .siteContent {
-        @include auto-prefix('flex', 1);
+.main-content {
+    .main-content-wrapper {
         position: relative;
+        max-width: $max-vw;
+        min-width: $min-vw;
+        min-height: 100vh;
+        height: 100%;
+        @include auto-prefix('display', flex);
+        @include auto-prefix('flex-direction', column);
+
+        .site-content {
+
+            @include auto-prefix('flex', 1);
+        }
     }
 }

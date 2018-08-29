@@ -10,5 +10,5 @@ module.exports = {
     publicPath:  NODE_ENV != 'development' ? '../' : `http://localhost:9090/`,
     sourceMap: NODE_ENV == 'development' ? true : false,
     externals  : {},
-    vendor: ['react', 'react-dom', 'react-router-dom', 'react-router-config']
+    vendor: ['react', 'react-dom', 'react-router-dom']
 }

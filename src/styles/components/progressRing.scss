@@ -1,0 +1,9 @@
+@import "../utils/index";
+
+.component-progressCycle {
+    .progress-ring_circle {
+        transition: stroke-dashoffset 0.5s;
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+    }
+}
