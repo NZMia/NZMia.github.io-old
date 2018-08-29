@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class About extends Component {
+class NotFound extends Component {
 
     constructor(...args) {
         super(...args);
@@ -12,9 +12,9 @@ class About extends Component {
 
     render() {
         return (
-            <div className="site-content">about</div>
+            <div className="site-content">Not found</div>
         )
     }
 }
 
-export default About;
+export default NotFound;

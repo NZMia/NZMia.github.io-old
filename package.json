@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dll": "rimraf dll && cross-env NODE_ENV=development webpack -p --config ./configs/webpack.dll.config.js",
-    "start": "npm run clean && cross-env NODE_ENV=production node bin/start",
+    "start": "cross-env NODE_ENV=production node bin/start",
     "build": "npm run clean && cross-env NODE_ENV=development node ./bin/build.js",
     "prod": "npm run clean && cross-env NODE_ENV=production node ./bin/build.js",
     "clean": "rimraf dist"
@@ -54,10 +54,10 @@
     "@fortawesome/react-fontawesome": "0.1.0-11",
     "express": "^4.16.3",
     "hoek": "^5.0.3",
+    "mysql": "^2.16.0",
     "npm": "^6.3.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.3.1"
   }
 }
