@@ -1,5 +1,7 @@
 const express = require('express');
 const webpack = require('webpack');
+const mysql = require('mysql');
+
 const opn = require('opn');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -14,6 +16,14 @@ const app = express();
 
 app.use(compress());
 
+// const connection = mysql.createConnection({
+//  host     : 'localhost',
+//  user     : 'admin',
+//  password : '',
+//  database : 'NZMia'
+// });
+//
+// connection.connect();
 
 const devMiddleware = webpackDevMiddleware(compiler, {
     quiet   : false,

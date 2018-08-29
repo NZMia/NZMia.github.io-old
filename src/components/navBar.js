@@ -19,7 +19,7 @@ class NavBar extends Component {
         var changeSticky = document.querySelector('header').clientHeight;
         var endSticky = document.querySelector('.endSticky').offsetTop;
         var windowH = window.scrollY;
-
+        
         if (windowH > changeSticky  && windowH < endSticky) {
 
             this.setState({stickyState: 'stickyNav'})
