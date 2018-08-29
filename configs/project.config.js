@@ -8,6 +8,7 @@ module.exports = {
     dllDir: '../dll',
     outDir: '../dist',
     publicPath:  NODE_ENV != 'development' ? '../' : `http://localhost:9090/`,
+	assetsPublicPath: '',
     sourceMap: NODE_ENV == 'development' ? true : false,
     externals  : {},
     vendor: ['react', 'react-dom', 'react-router-dom']

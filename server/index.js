@@ -1,6 +1,6 @@
 const express = require('express');
 const webpack = require('webpack');
-const mysql = require('mysql');
+const httpProxy = require('http-proxy');
 
 const opn = require('opn');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -16,15 +16,6 @@ const app = express();
 
 app.use(compress());
 
-// const connection = mysql.createConnection({
-//  host     : 'localhost',
-//  user     : 'admin',
-//  password : '',
-//  database : 'NZMia'
-// });
-//
-// connection.connect();
-
 const devMiddleware = webpackDevMiddleware(compiler, {
     quiet   : false,
     noInfo  : false,
@@ -33,8 +24,26 @@ const devMiddleware = webpackDevMiddleware(compiler, {
     stats   : 'errors-only',
 });
 
+const targetUrl = `http://localhost:${port}`;
+const proxy = httpProxy.createProxyServer({
+	target:targetUrl
+});
+
+app.use('/api',(req,res)=>{
+	proxy.web(req,res,{target:targetUrl})
+});
+
+// app.listen(port,(err)=>{
+// 	devMiddleware.waitUntilValid(()=>{
+// 		// opn("http://localhost:"+ port)
+// 		opn("https://NZMia.github.io");
+// 	});
+// 	console.log(`===>open http://localhost:${port} in a browser to view the app`);
+// });
+
 devMiddleware.waitUntilValid(()=>{
-    opn("http://localhost:"+ port)
+    //opn("http://localhost:"+ port)
+	opn("https://NZMia.github.io");
 });
 
 const hotMiddleware = webpackHotMiddleware(compiler, {
