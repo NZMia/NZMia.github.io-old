@@ -1,21 +1,33 @@
 {
-  "name": "webpack4-exercise",
+  "name": "nzmia.github.io",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://NZMia.github.io",
+  "private": true,
+  "homepage": "https://github.com/NZMia/admin-nzmia.github.io#index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "npm run start",
     "deploy": "gh-pages -d dist",
     "dll": "rimraf dll && cross-env NODE_ENV=development webpack -p --config ./configs/webpack.dll.config.js",
-    "start": "npm run dll && cross-env NODE_ENV=production node bin/start",
+    "start": "cross-env NODE_ENV=production node bin/start",
     "build": "npm run clean && cross-env NODE_ENV=development node ./bin/build.js",
     "prod": "npm run clean && cross-env NODE_ENV=production node ./bin/build.js",
     "clean": "rimraf dist"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NZMia/NZMia.github.io"
+  },
+  "keywords": [
+    "express",
+    "mongodb"
+  ],
+  "author": "Mia",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NZMia/NZMia.github.io/issues"
+  },
   "devDependencies": {
     "add-asset-html-webpack-plugin": "^2.1.3",
     "babel-core": "^6.26.3",
@@ -57,9 +69,12 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
     "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
     "@fortawesome/react-fontawesome": "0.1.0-11",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "hoek": "^5.0.3",
-    "mysql": "^2.16.0",
+    "mongodb": "^3.1.4",
+    "mongoose": "^5.2.13",
     "npm": "^6.3.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",

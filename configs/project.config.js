@@ -1,8 +1,17 @@
-const NODE_ENV = process.env.NODE_ENV || 'development';
+
+const env = process.env;
+const NODE_ENV = env.NODE_ENV || 'development';
 
 module.exports = {
     env: NODE_ENV,
-    dev_port: '9090',
+
+	host: env.HOST || 'localhost',
+	port: env.PORT || (NODE_ENV === 'production' ? 9090 : '../'),
+	apiHost: env.APIHOST || 'localhost',
+	apiPort: env.APIPORT || '9090',
+	dbHost: 'root',
+
+	dev_port: '9090',
     basePath: __dirname,
     srcDir: '../src',
     dllDir: '../dll',

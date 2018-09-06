@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM  from 'react-dom';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter, BrowserRouter } from 'react-router-dom';
 import { routes } from './router/router';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faHeart, faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -21,7 +21,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <HashRouter>
+            <BrowserRouter>
                 <section className="main-content">
 
 					<NavBar />
@@ -33,7 +33,7 @@ class App extends React.Component {
 	                </div>
 
                 </section>
-            </HashRouter>
+            </BrowserRouter>
         )
     }
 }
