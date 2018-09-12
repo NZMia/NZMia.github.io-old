@@ -1,7 +1,9 @@
 const express = require('express');
 const webpack = require('webpack');
+const path = require('path');
 const httpProxy = require('http-proxy');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 const opn = require('opn');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -14,11 +16,6 @@ const project = require('../configs/project.config');
 const port = project.apiPort;
 const host = project.apiHost;
 
-const app = express();
-
-app.use(compress());
-app.use(bodyParser.urlencoded({ extended: true }));
-
 const devMiddleware = webpackDevMiddleware(compiler, {
     quiet   : false,
     noInfo  : false,
@@ -29,28 +26,53 @@ const devMiddleware = webpackDevMiddleware(compiler, {
 
 const targetUrl = `http://${host}:${port}`;
 
-devMiddleware.waitUntilValid(()=>{
-    opn("http://"+ host + ":" + port)
-});
-
 const hotMiddleware = webpackHotMiddleware(compiler, {
     path : '/__webpack_hmr',
     log  : false
 });
 
-
 const proxy = httpProxy.createProxyServer({
 	target:targetUrl
 });
 
-app.use('/api/*',(req,res,err) =>{
-	if(err) throw err;
-	proxy.web(req,res,{target:targetUrl})
-});
+const router = express.Router();
+const app = express();
+
+app.use(compress());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(devMiddleware);
 app.use(hotMiddleware);
-app.use(express.static(project.basePath));
+app.use(express.static(project.outDir));
+
+app.use('*',(req,res,next) =>{
+
+	const filename = path.join(project.outDir, 'index.html');
+
+	compiler.outputFileSystem.readFile(filename, (err, result) => {
+		if (err) {
+			return next(err);
+		}
+		res.set("content-type", "text/html");
+		res.send(result);
+		res.end();
+	});
+	//proxy.web(req,res,{target:targetUrl})
+});
+
+// devMiddleware.waitUntilValid(()=>{
+// 	opn("http://localhost:"+ port);
+// });
+
+
+app.get('/tesss', function (req, res) {
+	res.send('Hello World!')
+});
+
+app.get('/dev', function (req, res) {
+	res.send('Hello, you are now on the Dev route!');
+});
 
 module.exports = {
     app,
@@ -58,27 +80,6 @@ module.exports = {
     port
 };
 
-
-const router = express.Router();
-
-
-router.use(function (req, res, next) {
-	console.log('this is request');
-	next()
-});
-
-router.get('/', function(req, res) {
-	res.send('<h1>Hello World</h1>');
-});
-
-router.get('/:name', function (req, res) {
-	res.send('<h1>Hello ' + req.params.name + '</h1>');
-});
-
-router.post('/',function (req, res) {
-	var name = req.body.name;
-	res.json({message: 'hello' + name});
-});
 
 // mongoClient.connect(dbURL).then(client => {
 //
@@ -98,4 +99,4 @@ router.post('/',function (req, res) {
 // 	console.log('error connecting to mongodb', err);
 // });
 
-app.use('/express', router);
+// app.use('/express', router);

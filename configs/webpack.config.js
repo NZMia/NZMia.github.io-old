@@ -3,13 +3,14 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-
+const AntdScssThemePlugin = require('antd-scss-theme-plugin');
 const project = require('./project.config');
 
 const envDev = project.env === 'development';
 const devtool = project.sourceMap ? 'cheap-source-map' : false;
 
 const SRC_DIR = path.join(project.basePath, project.srcDir);
+
 const config = {
 
     mode: project.env,
@@ -50,6 +51,26 @@ const config = {
                 include: SRC_DIR,
                 exclude: /node_modules/
             },
+	        {
+		        test: /\.less$/,
+		        use: [
+			        {
+				        loader: 'style-loader',
+				        options: {
+					        sourceMap: devtool,
+				        },
+			        },
+			        {
+				        loader: 'css-loader',
+				        options: {
+					        importLoaders: 1,
+					        sourceMap: devtool,
+				        },
+			        },
+
+			        AntdScssThemePlugin.themify('less-loader')
+		        ],
+	        },
             {
                 test:/\.(sa|sc|c)ss$/,
                 use :[
@@ -141,6 +162,8 @@ const config = {
                 ignoreCustomComments: envDev ? false : [ /^!/ ]
             }
         }),
+
+	    new AntdScssThemePlugin('./theme.scss'),
 
         new AddAssetHtmlPlugin({
             filepath: path.resolve(project.basePath, '../dll/*.dll.js'),

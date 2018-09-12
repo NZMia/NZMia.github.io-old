@@ -8,5 +8,19 @@
     "stage-0"
 
   ],
-  "plugins": ["transform-runtime"]
+  "plugins": [
+    "transform-runtime",
+    "transform-decorators-legacy",
+    ["import", {
+      "libraryName": "antd",
+      "libraryDirectory": "lib",
+      "style": true},
+      "ant"],
+
+    ["import", {
+      "libraryName": "ant-mobile",
+      "libraryDirectory": "lib",
+      "style": true},
+      "ant-mobile"]
+  ]
 }

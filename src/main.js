@@ -10,6 +10,7 @@ import NavBar from './components/navBar';
 import Footer from './components/footer';
 
 import renderRoutes from './router/routerConfig';
+import './router/axiosConfig'
 import 'main.scss';
 
 library.add(faUser, faHeart, faArrowRight);
@@ -27,7 +28,7 @@ class App extends React.Component {
 					<NavBar />
 
 	                <div className="main-content-wrapper">
-		                <Header name={"LMS"} />
+		                <Header name={"Test"} />
 		                {renderRoutes(routes, authed, authPath)}
 		                <Footer />
 	                </div>

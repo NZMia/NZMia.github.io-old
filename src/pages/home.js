@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import CardFlip from '../components/cardFlip';
-
+import axios from 'axios';
 const progressRing = require('../mockData/progressRing');
 
 class Home extends Component {
@@ -13,6 +13,14 @@ class Home extends Component {
         }
     }
 
+    getData = () => {
+	    axios.get('/data')
+		    .then(res => {
+			    if(res.status === 200) {
+			        console.log(res, 'res');
+			    }
+		    })
+    }
 
     componentWillMount() {
 
@@ -28,7 +36,7 @@ class Home extends Component {
                 <div className="cardFlip-wrapper flex flex-spaceAround">
                     {
                         Object.keys(progressRing).map((k, i) => {
-                            return  <CardFlip key={i} />
+                            return  <CardFlip onClick={this.getData} key={i} />
                         })
                     }
                 </div>
