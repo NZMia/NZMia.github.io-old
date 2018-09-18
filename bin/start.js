@@ -1,4 +1,4 @@
-const server = require('../server');
+const server = require('../server/start');
 
 server.app.listen(server.port, (err) => {
 	if(err){

@@ -1,39 +1,31 @@
 const express = require('express');
-
+const mongoose = require('mongoose');
 
 const app = express();
-const mongoClient = require('mongodb').MongoClient;
-
 const dbURL = 'mongodb://localhost:27017/blog';
 
-mongoClient.connect(dbURL).then(client => {
+const userSchema = require('./models/user');
+mongoose.connect(dbURL, { useNewUrlParser: true });
+mongoose.set('useCreateIndex', true);
 
-	const db = client.db('blog');
+mongoose.connection.on('connected', function () {
 
-	db.collection('test').insertOne({
-		eId: 1,
-		eName: 'Mia'
+	console.log('mongo connect success');
+});
+const User = mongoose.model('user', userSchema);
+
+User.updateOne({'email':'nzmiazhang@gmail.com'},{'$set':{age: 18}},function(err,doc){
+	console.log(doc)
+});
+
+app.get('/',function(req,res){
+	res.send('<h1>Hello world</h1>')
+});
+
+app.get('/myAuth', function (req, res) {
+	User.findOne({email: 'nzmiazhang@gmail.com'},function (err, doc) {
+		res.json(doc)
 	});
-
-	console.log('connected successfully');
-
-	client.close();
-
-}).catch(err => {
-
-	console.log('error connecting to mongodb', err);
-});
-
-app.get('/', function (req, res) {
-	res.send('<h2>server testderere</h2>');
-});
-
-app.get('/myData', function (req, res) {
-	res.json({
-		name: 'mia',
-		type: 'develop',
-		gender: 'female'
-	})
 });
 
 app.listen(9091, function () {

@@ -18,5 +18,5 @@ module.exports = {
 	assetsPublicPath: '',
     sourceMap: NODE_ENV == 'development' ? true : false,
     externals  : {},
-    vendor: ['react', 'react-dom', 'react-router-dom']
+    vendor: ['react', 'react-dom', 'react-router-dom', 'redux', 'react-redux', 'redux-thunk']
 };

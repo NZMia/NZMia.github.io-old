@@ -141,6 +141,10 @@ const config = {
         hints: false
     },
 
+	devServer: {
+		historyApiFallback: true,
+	},
+
     plugins: [
         new webpack.DllReferencePlugin({
             context : project.basePath,

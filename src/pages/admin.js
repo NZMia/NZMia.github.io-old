@@ -23,7 +23,12 @@ class Admin extends Component {
     render() {
         return (
             <div className="page-admin site-content">
-                admin tester
+                <h2>
+	                your name is {this.props.user}, age is {this.props.age}
+                </h2>
+	            { this.props.isAuth? <Redirect to='/admin' /> : null}
+	            <h2>You must login </h2>
+				<button onClick={this.props.login}>login</button>
             </div>
         )
     }
