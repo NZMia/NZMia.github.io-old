@@ -67,7 +67,7 @@ export function register_action({ email, pwd, rePwd, type, firstName, lastName }
 		// })
 
 		//method B
-		axios.defaults.headers = { 'Content-Type': 'application/json' }
+		axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 		axios.post('/user/register', { email, pwd, type, firstName, lastName }).then(res => {
 			console.log('----------- user.redux.js --------------')
