@@ -1,11 +1,10 @@
-import Home from '../pages/home';
-import Login from '../pages/login';
-import About from '../pages/about';
-import Admin from '../pages/admin';
-import Count from '../pages/count';
-import Auth from '../pages/auth';
-import NotFound from '../pages/notFound';
+import Home from '../container/home';
+import Login from '../container/login';
+import About from '../container/about';
+import Admin from '../container/admin';
+import NotFound from '../container/notFound';
 
+import Auth from '../utils/auth';
 export const routes = [
     {
         path: '/',
@@ -14,24 +13,24 @@ export const routes = [
         component: Home,
         requiresAuth: false,
     },
+    // {
+    //     path: '/about',
+    //     name: 'About',
+    //     component: About,
+    //     requiresAuth: false,
+    // },
     {
-        path: '/about',
-        name: 'About',
-        component: About,
-        requiresAuth: false,
-    },
-    {
-        path: '/auth',
+        path: '/user',
         name: 'Admin',
         component: Auth,
         requiresAuth: true,
     },
-	{
-		path: '/count',
-		name: 'Count',
-		component: Count,
-		requiresAuth: false,
-	},
+	// {
+	// 	path: '/count',
+	// 	name: 'Count',
+	// 	component: Count,
+	// 	requiresAuth: false,
+	// },
 
 	// {
 	// 	path: '/admin',

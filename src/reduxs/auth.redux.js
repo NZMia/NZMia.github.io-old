@@ -8,7 +8,6 @@ const initState = {
 };
 
 export function Auth(state=initState,action){
-	// console.log(state,action);
 
 	switch(action.type){
 
@@ -40,13 +39,14 @@ export function logout(){
 
 export function getUserData(){
 
-	// return	dispatch=>{
-	//
-	// 	axios.get('/data').then(res=>{
-	//
-	// 		if (res.status===200) {
-	// 			dispatch(userData(res.data))
-	// 		}
-	// 	})
-	// }
+	return	dispatch=>{
+
+		axios.get('/myAuth').then(res=>{
+
+			console.log(res);
+			if (res.status===200) {
+				dispatch(userData(res.data))
+			}
+		})
+	}
 }

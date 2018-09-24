@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import CardFlip from '../components/cardFlip';
 import axios from 'axios';
 // const progressRing = require('../mockData/progressRing');
+import { Button } from 'antd';
+
 
 class Home extends Component {
 
@@ -41,6 +43,7 @@ class Home extends Component {
     render() {
         return (
             <div className="page-home site-content">
+	            <Button type="dashed">Dash</Button>
                 {/*<div className="cardFlip-wrapper flex flex-spaceAround">*/}
                     {/*{*/}
                         {/*Object.keys(progressRing).map((k, i) => {*/}
@@ -58,18 +61,7 @@ class Home extends Component {
 
 
 	            {/*<BrowserRouter>*/}
-	            {/*<section className="main-content">*/}
-	            {/*/!*<NavBar />*!/*/}
-	            {/*<div className="main-content-wrapper">*/}
-	            {/*<Header name={"Redux"} />*/}
-	            {/*<Switch>*/}
-	            {/*<Route path='/' exact component={Home}></Route>*/}
-	            {/*<Route path='/auth' component={Auth}></Route>*/}
 
-	            {/*</Switch>*/}
-	            {/*<Footer />*/}
-	            {/*</div>*/}
-	            {/*</section>*/}
 	            {/*</BrowserRouter>*/}
             </div>
         )

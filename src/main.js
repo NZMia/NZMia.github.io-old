@@ -11,12 +11,15 @@ import { faUser, faHeart, faArrowRight } from '@fortawesome/free-solid-svg-icons
 import Header from './components/header';
 import NavBar from './components/navBar';
 import Footer from './components/footer';
-import Auth from './pages/auth';
-import Home from './pages/home';
+import Home from './container/home';
+import Login from './container/login';
+import Register from './container/register';
+import Admin from "./container/admin";
 
 import { routes } from './router/router';
-import reducers from './reducers/index.redux';
+import reducers from './reduxs/index.redux';
 
+import Auth from './utils/auth';
 import renderRoutes from './router/routerConfig';
 
 import './router/axiosConfig';
@@ -29,20 +32,27 @@ const store = createStore(reducers, compose(
 	window.devToolsExtension? window.devToolsExtension():f=>f
 ));
 
-console.log(store.getState());
-
 class App extends React.Component {
 
     render() {
         return (
 	        <Provider store={store}>
-		       <BrowserRouter>
-		        <Switch>
-					<Route path='/' exact component={Auth}></Route>
-			        <Route path='/dashboard' component={Home}></Route>
-			        {/*<Redirect to='/dashboard'></Redirect>*/}
-				</Switch>
-		       </BrowserRouter>
+		        <HashRouter>
+			        <section className="main-content">
+						<NavBar />
+				        <div className="main-content-wrapper">
+					        <Header name={"Redux"} />
+
+					        <Route path='/' exact component={Home}></Route>
+					        <Route path='/user' component={Auth}></Route>
+					        <Route path='/login' component={Login}></Route>
+					        <Route path='/admin' component={Admin}></Route>
+					        <Route path='/register' component={Register}></Route>
+
+					        <Footer />
+				        </div>
+			        </section>
+		        </HashRouter>
 	        </Provider>
         )
     }

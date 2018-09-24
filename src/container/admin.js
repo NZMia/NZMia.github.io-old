@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { logout, getUserData } from "../reduxs/auth.redux";
 
+@connect (
+	state=>state.Auth,
+	{ logout, getUserData }
+)
 class Admin extends Component {
 
     constructor(...args) {
@@ -26,9 +32,8 @@ class Admin extends Component {
                 <h2>
 	                your name is {this.props.user}, age is {this.props.age}
                 </h2>
-	            { this.props.isAuth? <Redirect to='/admin' /> : null}
-	            <h2>You must login </h2>
-				<button onClick={this.props.login}>login</button>
+
+				<button onClick={this.props.logout}>logout</button>
             </div>
         )
     }

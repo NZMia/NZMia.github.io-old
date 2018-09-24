@@ -3,7 +3,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-const AntdScssThemePlugin = require('antd-scss-theme-plugin');
 const project = require('./project.config');
 
 const envDev = project.env === 'development';
@@ -55,20 +54,29 @@ const config = {
 		        test: /\.less$/,
 		        use: [
 			        {
-				        loader: 'style-loader',
+				        loader: MiniCssExtractPlugin.loader,
 				        options: {
 					        sourceMap: devtool,
-				        },
+					        publicPath: project.publicPath
+				        }
 			        },
 			        {
-				        loader: 'css-loader',
+				        loader : 'css-loader',
 				        options: {
-					        importLoaders: 1,
-					        sourceMap: devtool,
-				        },
+					        minimize: envDev? false : true
+				        }
 			        },
-
-			        AntdScssThemePlugin.themify('less-loader')
+			        {
+				        loader: 'postcss-loader',
+				        options: {
+					        config: {
+						        path: path.join(project.basePath, 'postcss.config.js')
+					        }
+				        }
+			        },
+			        {
+				        loader: 'less-loader"'
+			        }
 		        ],
 	        },
             {
@@ -166,8 +174,6 @@ const config = {
                 ignoreCustomComments: envDev ? false : [ /^!/ ]
             }
         }),
-
-	    new AntdScssThemePlugin('./theme.scss'),
 
         new AddAssetHtmlPlugin({
             filepath: path.resolve(project.basePath, '../dll/*.dll.js'),
