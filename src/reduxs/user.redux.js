@@ -5,29 +5,29 @@ const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 const ERROR_MSG = "ERROR_MSG";
 
 const initState = {
-	isAuth:false,
-	msg:" ",
-	email:" ",
+	isAuth: false,
+	msg: " ",
+	email: " ",
 	firstName: " ",
 	lastName: " ",
-	pwd:" ",
-	type:" "
+	pwd: " ",
+	type: " "
 };
 
 const header = {
 	'Content-Type': 'multipart/form-data',
 }
-export function user_reducer(state=initState, action) {
+export function user_reducer(state = initState, action) {
 
 	switch (action.type) {
 		case REGISTER_SUCCESS:
 			return {
 				...state,
-				msg:'',
+				msg: '',
 				isAuth: true,
 				...action.payload
 			};
-		case  ERROR_MSG:
+		case ERROR_MSG:
 			return {
 				...state,
 				isAuth: false,
@@ -38,33 +38,45 @@ export function user_reducer(state=initState, action) {
 	}
 }
 
-export function errorMsg (msg) {
-	return {msg, type: ERROR_MSG};
+export function errorMsg(msg) {
+	return { msg, type: ERROR_MSG };
 }
 
 export function registerSuccess(data) {
-	return {type: REGISTER_SUCCESS, payload:data}
+	return { type: REGISTER_SUCCESS, payload: data }
 }
 
-export function register_action({email, pwd, rePwd, type, firstName, lastName}) {
+export function register_action({ email, pwd, rePwd, type, firstName, lastName }) {
 
-	if (!email || !pwd || !type || !firstName || !lastName ) {
+	if (!email || !pwd || !type || !firstName || !lastName) {
 		return errorMsg("Please fill up ALL fields");
 	}
 
-	if(pwd !== rePwd) {
+	if (pwd !== rePwd) {
 		return errorMsg("Password not match up");
 	}
 
-	return dispatch=>{
-		axios.post('/user/register', {email, pwd, type, firstName, lastName}).then(res => {
+	return dispatch => {
+		// method A
+		// fetch('/user/register', {
+		// 	method: 'POST',
+		// 	headers: { 'content-type': 'application/json' },
+		// 	body: JSON.stringify({ email: 'abc@testabe.com', password: 'password' })
+		// }).then(res => {
+		// 	console.log(res.body)
+		// })
+
+		// method B
+		axios.defaults.headers = { 'Content-Type': 'application/json' }
+		axios.post('/user/register', { email: 'abc@test.com' }).then(res => {
+			console.log('----------- user.redux.js --------------')
+			console.log(res)
 			if (res.status === 200 && res.data.code === 0) {
+				dispatch(registerSuccess({ email, pwd, type, firstName, lastName }));
+				console.log(JSON.stringify({ email, pwd, type, firstName, lastName }));
+				console.log(registerSuccess({ email, pwd, type, firstName, lastName }));
 
-				dispatch(registerSuccess({email, pwd, type, firstName, lastName}));
-				console.log(JSON.stringify({email, pwd, type, firstName, lastName}));
-				console.log(registerSuccess({email, pwd, type, firstName, lastName}));
-
-			}else {
+			} else {
 				dispatch(errorMsg(res.data.msg))
 			}
 		})

@@ -3,8 +3,8 @@ import { Select, Input, Icon, Button } from 'antd';
 import { connect } from 'react-redux';
 import { register_action } from "../reduxs/user.redux";
 
-@connect (
-	state=>state.user_reducer,
+@connect(
+	state => state.user_reducer,
 	{ register_action }
 )
 class Register extends Component {
@@ -25,7 +25,7 @@ class Register extends Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 
-	handleChange(key,val){
+	handleChange(key, val) {
 
 		this.setState({
 			[key]: key != 'type' ? val.target.value : val
@@ -36,56 +36,56 @@ class Register extends Component {
 	}
 
 	render() {
-		return(
+		return (
 			<div className="auth-page site-content flex flex-center">
-	            <div className="auth-wrapper">
-		            <Input.Group>
-			            {
-			            	this.props.msg? <p className='error-msg' style={{ color: '#f50' }}>{this.props.msg}</p>:null
-			            }
+				<div className="auth-wrapper">
+					<Input.Group>
+						{
+							this.props.msg ? <p className='error-msg' style={{ color: '#f50' }}>{this.props.msg}</p> : null
+						}
 						<Input placeholder="Email"
-						       prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-						       onChange={val => this.handleChange('email', val)} />
+							prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+							onChange={val => this.handleChange('email', val)} />
 
-			            <Input placeholder="First Name"
-			                    type="text"
-			                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-			                    onChange={val => this.handleChange('firstName', val)} />
+						<Input placeholder="First Name"
+							type="text"
+							prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+							onChange={val => this.handleChange('firstName', val)} />
 
-			            <Input placeholder="Last Name"
-			                   type="text"
-			                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-			                   onChange={val => this.handleChange('lastName', val)} />
+						<Input placeholder="Last Name"
+							type="text"
+							prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+							onChange={val => this.handleChange('lastName', val)} />
 
-			            <Input placeholder="Password"
-			                   type="text"
-			                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-			                   onChange={val => this.handleChange('pwd', val)} />
+						<Input placeholder="Password"
+							type="text"
+							prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+							onChange={val => this.handleChange('pwd', val)} />
 
-			            <Input placeholder="Confirm password"
-			                   type="text"
-			                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-			                   onChange={val => this.handleChange('rePwd', val)} />
+						<Input placeholder="Confirm password"
+							type="text"
+							prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+							onChange={val => this.handleChange('rePwd', val)} />
 
-		            </Input.Group>
+					</Input.Group>
 
-		            <div className="select-wrapper">
+					<div className="select-wrapper">
 
-			            <Select className="flex flex-horizontal-center"
-			                    defaultValue="---Select---"
-			                    style={{ flex: '1' }}
-			                    onChange={val => this.handleChange('type', val)}>
-					        <Select.Option value="Visitor">Visitor</Select.Option>
+						<Select className="flex flex-horizontal-center"
+							defaultValue="---Select---"
+							style={{ flex: '1' }}
+							onChange={val => this.handleChange('type', val)}>
+							<Select.Option value="Visitor">Visitor</Select.Option>
 							<Select.Option value="Administrator">Administrator</Select.Option>
-					    </Select>
-		            </div>
+						</Select>
+					</div>
 
-		            <div className="button-wrapper">
-			            <Button type="dashed" onClick={this.handleRegister}>
-				            Sign Up
+					<div className="button-wrapper">
+						<Button type="dashed" onClick={this.handleRegister}>
+							Sign Up
 			            </Button>
-		            </div>
-	            </div>
+					</div>
+				</div>
 			</div>
 		)
 	}
