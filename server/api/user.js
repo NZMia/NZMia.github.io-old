@@ -20,26 +20,6 @@ Router.post('/register', function (req, res) {
 
 	console.log("-------------------");
 
-	user.create({email, pwd, type, firstName, lastName}, function (error) {
-
-		if(error) {
-			return res.json({code: 0, msg: 'backend got wrong'})
-		}
-		user.findOne({email:email},function(err,doc){
-
-			if (doc) {
-				return res.json({code:1,msg:'User exists'})
-			}
-
-			user.create({email, pwd, type, firstName, lastName}, function (error) {
-				if (error) {
-					console.log(error);
-					return res.json({code: 1, msg: 'backend got wrong'})
-				}
-				return res.json({code: 0})
-			})
-		})
-	});
 });
 
 Router.get('/info',function (req,res) {
