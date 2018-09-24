@@ -66,9 +66,10 @@ export function register_action({ email, pwd, rePwd, type, firstName, lastName }
 		// 	console.log(res.body)
 		// })
 
-		// method B
+		//method B
 		axios.defaults.headers = { 'Content-Type': 'application/json' }
-		axios.post('/user/register', { email: 'abc@test.com' }).then(res => {
+
+		axios.post('/user/register', { email, pwd, type, firstName, lastName }).then(res => {
 			console.log('----------- user.redux.js --------------')
 			console.log(res)
 			if (res.status === 200 && res.data.code === 0) {
