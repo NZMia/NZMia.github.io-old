@@ -4,35 +4,36 @@ const Router = express.Router();
 const model = require('../db/models');
 const user = model.getModel('user');
 
-const bodyParser = require('body-parser');
-
-Router.use(bodyParser.urlencoded({ extended: false }));
-Router.use(bodyParser.json());
-
 Router.get('/list', function (req, res) {
-	user.find({}, function (err, doc) {
-		return res.json(doc);
-	});
+    user.find({}, function (err, doc) {
+        return res.json(doc);
+    });
 });
 
 Router.post('/register', function (req, res) {
-	const { email, pwd, type, firstName, lastName } = req.body;
+    const { email, pwd, type, firstName, lastName } = req.body;
 
-	console.log("-------- user.js -----------");
+    user.findOne({email:email},function(err,doc) {
 
-	// console.log(req);
-	console.log(req.body);
+        if (doc) {
 
-	console.log("----------end in user.js---------");
+            return res.json({code:1,msg:'User exists'})
 
-	res.json({
-		status: 200
-	})
+        } else  {
+            user.create({email, pwd, type, firstName, lastName}, function (error) {
+                if (error) {
+                    return res.json({code: 1, msg: 'backend got wrong'})
+                }
+                return res.json({code: 0})
+            })
+        }
+
+    });
 
 });
 
 Router.get('/info', function (req, res) {
-	return res.json({ code: 1 })
+    return res.json({ code: 1 })
 });
 
 module.exports = Router;

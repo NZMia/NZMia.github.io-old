@@ -50,35 +50,35 @@ const config = {
                 include: SRC_DIR,
                 exclude: /node_modules/
             },
-	        {
-		        test: /\.less$/,
-		        use: [
-			        {
-				        loader: MiniCssExtractPlugin.loader,
-				        options: {
-					        sourceMap: devtool,
-					        publicPath: project.publicPath
-				        }
-			        },
-			        {
-				        loader : 'css-loader',
-				        options: {
-					        minimize: envDev? false : true
-				        }
-			        },
-			        {
-				        loader: 'postcss-loader',
-				        options: {
-					        config: {
-						        path: path.join(project.basePath, 'postcss.config.js')
-					        }
-				        }
-			        },
-			        {
-				        loader: 'less-loader"'
-			        }
-		        ],
-	        },
+            {
+                test: /\.less$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            sourceMap: devtool,
+                            publicPath: project.publicPath
+                        }
+                    },
+                    {
+                        loader : 'css-loader',
+                        options: {
+                            minimize: envDev? false : true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            config: {
+                                path: path.join(project.basePath, 'postcss.config.js')
+                            }
+                        }
+                    },
+                    {
+                        loader: 'less-loader"'
+                    }
+                ],
+            },
             {
                 test:/\.(sa|sc|c)ss$/,
                 use :[
@@ -149,9 +149,9 @@ const config = {
         hints: false
     },
 
-	devServer: {
-		historyApiFallback: true,
-	},
+    devServer: {
+        historyApiFallback: true,
+    },
 
     plugins: [
         new webpack.DllReferencePlugin({

@@ -5,7 +5,7 @@ mongoDB.set('useCreateIndex', true);
 
 mongoDB.connection.on('connected', function () {
 
-	console.log('mongo connect success');
+    console.log('mongo connect success');
 });
 
 module.exports = mongoDB;
