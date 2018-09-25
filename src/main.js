@@ -28,32 +28,32 @@ import 'main.scss';
 library.add(faUser, faHeart, faArrowRight);
 
 const store = createStore(reducers, compose(
-	applyMiddleware(thunk),
-	window.devToolsExtension? window.devToolsExtension():f=>f
+    applyMiddleware(thunk),
+    window.devToolsExtension? window.devToolsExtension():f=>f
 ));
 
 class App extends React.Component {
 
     render() {
         return (
-	        <Provider store={store}>
-		        <HashRouter>
-			        <section className="main-content">
-						<NavBar />
-				        <div className="main-content-wrapper">
-					        <Header name={"Redux"} />
+            <Provider store={store}>
+                <HashRouter>
+                    <section className="main-content">
+                        <NavBar />
+                        <div className="main-content-wrapper">
+                            <Header name={"Redux"} />
 
-					        <Route path='/' exact component={Home}></Route>
-					        <Route path='/user' component={Auth}></Route>
-					        <Route path='/login' component={Login}></Route>
-					        <Route path='/admin' component={Admin}></Route>
-					        <Route path='/register' component={Register}></Route>
+                            <Route path='/' exact component={Home}></Route>
+                            <Route path='/user' component={Auth}></Route>
+                            <Route path='/login' component={Login}></Route>
+                            <Route path='/admin' component={Admin}></Route>
+                            <Route path='/register' component={Register}></Route>
 
-					        <Footer />
-				        </div>
-			        </section>
-		        </HashRouter>
-	        </Provider>
+                            <Footer />
+                        </div>
+                    </section>
+                </HashRouter>
+            </Provider>
         )
     }
 }

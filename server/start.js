@@ -27,7 +27,7 @@ const devMiddleware = webpackDevMiddleware(compiler, {
 });
 
 devMiddleware.waitUntilValid(()=>{
-	opn("http://localhost:"+ port);
+    opn("http://localhost:"+ port);
 });
 
 const hotMiddleware = webpackHotMiddleware(compiler, {
@@ -40,13 +40,13 @@ app.use(devMiddleware);
 app.use(hotMiddleware);
 app.use(express.static(project.outDir));
 app.use('/', proxy({
-	target: 'http://localhost:9091',
-	secure: false,
-	changeOrigin: true
+    target: 'http://localhost:9091',
+    secure: false,
+    changeOrigin: true
 }));
 
 module.exports = {
     app,
-	host,
+    host,
     port
 };
