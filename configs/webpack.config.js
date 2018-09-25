@@ -3,13 +3,13 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-
 const project = require('./project.config');
 
 const envDev = project.env === 'development';
 const devtool = project.sourceMap ? 'cheap-source-map' : false;
 
 const SRC_DIR = path.join(project.basePath, project.srcDir);
+
 const config = {
 
     mode: project.env,
@@ -49,6 +49,35 @@ const config = {
                 },
                 include: SRC_DIR,
                 exclude: /node_modules/
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            sourceMap: devtool,
+                            publicPath: project.publicPath
+                        }
+                    },
+                    {
+                        loader : 'css-loader',
+                        options: {
+                            minimize: envDev? false : true
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            config: {
+                                path: path.join(project.basePath, 'postcss.config.js')
+                            }
+                        }
+                    },
+                    {
+                        loader: 'less-loader"'
+                    }
+                ],
             },
             {
                 test:/\.(sa|sc|c)ss$/,
@@ -118,6 +147,10 @@ const config = {
 
     performance: {
         hints: false
+    },
+
+    devServer: {
+        historyApiFallback: true,
     },
 
     plugins: [

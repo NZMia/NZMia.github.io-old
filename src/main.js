@@ -1,39 +1,59 @@
 import React from 'react';
 import ReactDOM  from 'react-dom';
-import { HashRouter } from 'react-router-dom';
-import { routes } from './router/router';
+import { HashRouter, BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider, connect } from 'react-redux'
+import thunk from 'redux-thunk';
+
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faHeart, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import Header from './components/header';
 import NavBar from './components/navBar';
 import Footer from './components/footer';
+import Home from './container/home';
+import Login from './container/login';
+import Register from './container/register';
+import Admin from "./container/admin";
 
+import { routes } from './router/router';
+import reducers from './reduxs/index.redux';
+
+import Auth from './utils/auth';
 import renderRoutes from './router/routerConfig';
+
+import './router/axiosConfig';
 import 'main.scss';
 
 library.add(faUser, faHeart, faArrowRight);
 
-const authed = false;
-const authPath = '/login';
+const store = createStore(reducers, compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension? window.devToolsExtension():f=>f
+));
 
 class App extends React.Component {
 
     render() {
         return (
-            <HashRouter>
-                <section className="main-content">
+            <Provider store={store}>
+                <HashRouter>
+                    <section className="main-content">
+                        <NavBar />
+                        <div className="main-content-wrapper">
+                            <Header name={"Redux"} />
 
-					<NavBar />
+                            <Route path='/' exact component={Home}></Route>
+                            <Route path='/user' component={Auth}></Route>
+                            <Route path='/login' component={Login}></Route>
+                            <Route path='/admin' component={Admin}></Route>
+                            <Route path='/register' component={Register}></Route>
 
-	                <div className="main-content-wrapper">
-		                <Header name={"LMS"} />
-		                {renderRoutes(routes, authed, authPath)}
-		                <Footer />
-	                </div>
-
-                </section>
-            </HashRouter>
+                            <Footer />
+                        </div>
+                    </section>
+                </HashRouter>
+            </Provider>
         )
     }
 }

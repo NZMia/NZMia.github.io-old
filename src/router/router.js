@@ -1,9 +1,10 @@
-import Home from '../pages/home';
-import Login from '../pages/login';
-import About from '../pages/about';
-import Admin from '../pages/admin';
-import NotFound from '../pages/notFound';
+import Home from '../container/home';
+import Login from '../container/login';
+import About from '../container/about';
+import Admin from '../container/admin';
+import NotFound from '../container/notFound';
 
+import Auth from '../utils/auth';
 export const routes = [
     {
         path: '/',
@@ -12,27 +13,38 @@ export const routes = [
         component: Home,
         requiresAuth: false,
     },
+    // {
+    //     path: '/about',
+    //     name: 'About',
+    //     component: About,
+    //     requiresAuth: false,
+    // },
     {
-        path: '/login',
-        name: 'Login',
-        component: Login,
-        requiresAuth: false,
-    },
-    {
-        path: '/about',
-        name: 'About',
-        component: About,
-        requiresAuth: false,
-    },
-    {
-        path: '/admin',
+        path: '/user',
         name: 'Admin',
-        component: Admin,
+        component: Auth,
         requiresAuth: true,
     },
+	// {
+	// 	path: '/count',
+	// 	name: 'Count',
+	// 	component: Count,
+	// 	requiresAuth: false,
+	// },
+
+	// {
+	// 	path: '/admin',
+	// 	component: Admin,
+	// 	requiresAuth: false,
+	// },
+	// {
+	// 	path: '/login',
+	// 	component: Login,
+	// 	requiresAuth: false,
+	// },
     {
         path: '*',
         component: NotFound,
         requiresAuth: false,
     }
-]
+];

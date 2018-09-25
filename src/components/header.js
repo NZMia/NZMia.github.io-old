@@ -14,7 +14,9 @@ class Header extends Component {
         return (
             <header className="flex flex-center">
                 <div className="headerWrapper">
-                     <h1 className="text-lightBrown"> {this.state.name} Dashboard </h1>
+                     <h1 className="text-lightBrown">
+	                     {this.state.name} Test
+                     </h1>
                 </div>
             </header>
         )

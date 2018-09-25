@@ -1,6 +1,5 @@
 const express = require('express');
 const webpack = require('webpack');
-const httpProxy = require('http-proxy');
 
 const opn = require('opn');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -9,9 +8,12 @@ const compress = require('compression');
 
 const webpackConfig = require('../configs/webpack.config');
 const compiler = webpack(webpackConfig);
-const project = require('../configs/project.config');
-const port = project.dev_port;
 
+const project = require('../configs/project.config');
+const port = project.apiPort;
+const host = project.apiHost;
+
+var proxy = require('http-proxy-middleware');
 const app = express();
 
 app.use(compress());
@@ -24,26 +26,8 @@ const devMiddleware = webpackDevMiddleware(compiler, {
     stats   : 'errors-only',
 });
 
-const targetUrl = `http://localhost:${port}`;
-const proxy = httpProxy.createProxyServer({
-	target:targetUrl
-});
-
-app.use('/api',(req,res)=>{
-	proxy.web(req,res,{target:targetUrl})
-});
-
-// app.listen(port,(err)=>{
-// 	devMiddleware.waitUntilValid(()=>{
-// 		// opn("http://localhost:"+ port)
-// 		opn("https://NZMia.github.io");
-// 	});
-// 	console.log(`===>open http://localhost:${port} in a browser to view the app`);
-// });
-
 devMiddleware.waitUntilValid(()=>{
-    //opn("http://localhost:"+ port)
-	opn("https://NZMia.github.io");
+    opn("http://localhost:"+ port);
 });
 
 const hotMiddleware = webpackHotMiddleware(compiler, {
@@ -51,11 +35,18 @@ const hotMiddleware = webpackHotMiddleware(compiler, {
     log  : false
 });
 
+
 app.use(devMiddleware);
 app.use(hotMiddleware);
-app.use(express.static(project.basePath));
+app.use(express.static(project.outDir));
+app.use('/', proxy({
+    target: 'http://localhost:9091',
+    secure: false,
+    changeOrigin: true
+}));
 
 module.exports = {
     app,
+    host,
     port
-}
+};
