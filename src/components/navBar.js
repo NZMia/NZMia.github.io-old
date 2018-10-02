@@ -44,13 +44,12 @@ class NavBar extends Component {
     render() {
         return (
             <nav className={'component-nav flex flex-end' + ' ' + this.state.stickyState}>
-                {
-                    routes.map((r, i) => {
-                        return (
-                            r.name != null ?<li key={i}><Link to={r.path}>{r.name}</Link></li> : ""
-                        )
-                    })
-                }
+	            <li>
+		            <Link to='/'>Home</Link>
+	            </li>
+				<li>
+		            <Link to='/user'>Admin</Link>
+	            </li>
             </nav>
         )
     }

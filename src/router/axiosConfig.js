@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-// import {Toast} from 'antd-mobile';
+import Loading from '../components/spin';
 
-axios.defaults.basePath = '/api';
+axios.defaults.basePath = '/';
 axios.defaults.headers = {
-	"Content-Type": "application/x-www-form-urlencoded"
+	"Content-Type": "application/json"
 };
 
 // axios request interceptor

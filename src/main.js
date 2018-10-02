@@ -20,9 +20,8 @@ import { routes } from './router/router';
 import reducers from './reduxs/index.redux';
 
 import Auth from './utils/auth';
-import renderRoutes from './router/routerConfig';
 
-import './router/axiosConfig';
+// import './router/axiosConfig';
 import 'main.scss';
 
 library.add(faUser, faHeart, faArrowRight);
@@ -44,7 +43,7 @@ class App extends React.Component {
                             <Header name={"Redux"} />
 
                             <Route path='/' exact component={Home}></Route>
-                            <Route path='/user' component={Auth}></Route>
+                            <Route path='/user' exact component={Auth}></Route>
                             <Route path='/login' component={Login}></Route>
                             <Route path='/admin' component={Admin}></Route>
                             <Route path='/register' component={Register}></Route>

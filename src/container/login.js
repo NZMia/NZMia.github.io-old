@@ -2,38 +2,38 @@ import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import { Input, Icon, Button } from 'antd';
 import { connect } from 'react-redux';
-import { login, getUserData } from "../reduxs/auth.redux";
+import { login_action } from "../reduxs/user.redux";
 
 @connect (
-    state=>state.Auth,
-    { login, getUserData }
+    state=>state.user_reducer,
+    { login_action }
 )
 
 class Login extends Component {
 
     constructor(...args) {
         super(...args);
-        var _this = this;
-        _this.state = {
-            user: '',
+        this.state = {
+            email: '',
             pwd: ''
         }
-        _this.handleRegister = this.handleRegister.bind(this);
-        _this.handleLogin = this.handleRegister.bind(this);
+	    this.handleRegister = this.handleRegister.bind(this);
+	    this.handleLogin = this.handleLogin.bind(this);
+	    this.handleChange = this.handleChange.bind(this);
     }
 
 
     handleRegister() {
-        this.props.history.push('/register')
+        this.props.history.push('/register');
     }
 
     handleLogin() {
-        console.log('login');
+	    this.props.login_action(this.state);
     }
 
     handleChange(key, val) {
         this.setState({
-            [key]: val
+            [key]: val.target.value
         })
     }
 
@@ -42,9 +42,12 @@ class Login extends Component {
             <div className="auth-page site-content flex flex-center">
 
                 <div className="auth-wrapper">
+	                {
+		                this.props.msg ? <p className='error-msg' style={{ color: '#f50' }}>{this.props.msg}</p> : null
+	                }
                     <Input placeholder="Enter your email"
                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                           onChange={val => this.handleChange('user', val)} />
+                           onChange={val => this.handleChange('email', val)} />
 
                     <Input placeholder="Enter your password"
                            type="password"
