@@ -15,13 +15,14 @@ import Home from './container/home';
 import Login from './container/login';
 import Register from './container/register';
 import Admin from "./container/admin";
+import Achieve from './container/achieve';
 
 import { routes } from './router/router';
 import reducers from './reduxs/index.redux';
 
 import Auth from './utils/auth';
 
-// import './router/axiosConfig';
+import './router/axiosConfig';
 import 'main.scss';
 
 library.add(faUser, faHeart, faArrowRight);
@@ -44,6 +45,7 @@ class App extends React.Component {
 
                             <Route path='/' exact component={Home}></Route>
                             <Route path='/user' exact component={Auth}></Route>
+	                        <Route path='/achieve' component={Achieve}></Route>
                             <Route path='/login' component={Login}></Route>
                             <Route path='/admin' component={Admin}></Route>
                             <Route path='/register' component={Register}></Route>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom';
 import { Select, Input, Icon, Button } from 'antd';
 import { connect } from 'react-redux';
 import { register_action } from "../reduxs/user.redux";
@@ -38,6 +39,7 @@ class Register extends Component {
     render() {
         return (
             <div className="auth-page site-content flex flex-center">
+	            {this.props.redirectTo? <Redirect to={this.props.redirectTo} />:null}
                 <div className="auth-wrapper">
                     <Input.Group>
                         {

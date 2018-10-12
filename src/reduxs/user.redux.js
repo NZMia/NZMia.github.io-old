@@ -1,5 +1,4 @@
 import axios from 'axios';
-import qs from 'qs';
 import { getRedirectPath } from "../utils/redirect";
 
 const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -52,7 +51,6 @@ export function errorMsg(msg) {
 }
 
 export function loginSuccess(data) {
-
 	return { type: LOGIN_SUCCESS, payload: data }
 }
 
@@ -60,28 +58,23 @@ export function registerSuccess(data) {
     return { type: REGISTER_SUCCESS, payload: data }
 }
 
-export function login_action({ email, pwd }) {
+export function login_action({ email, pwd, type }) {
 
-	if(!email || !pwd) {
+	if(!email || !pwd || !type) {
 		return errorMsg("Please fill in fields")
 	}
 
 	return dispatch => {
 
-		axios.defaults.headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*' };
+		axios.post('/user/login', { email, pwd, type }).then(res => {
 
-		axios.post('/user/login', { email:'nzmiazhang@gmail.com', pwd:'123' }).then(res => {
+			if(res.status === 200 && res.data.code === 0) {
 
-			//console.log(res);
-			dispatch(loginSuccess({email, pwd}));
-			//
-			// if(res.status === 0 && res.data.code === 0 ) {
-			//
-			//     dispatch(loginSuccess({email, pwd}));
-			// }else {
-			//
-			//     dispatch(errorMsg(res.data.msg));
-			// }
+			    dispatch(loginSuccess({email, pwd, type}));
+			}else {
+
+			    dispatch(errorMsg(res.data.msg));
+			}
 		}).catch(err => {
 			console.log("error:"+ err );
 		})
@@ -99,7 +92,7 @@ export function register_action({ email, pwd, rePwd, type, firstName, lastName }
     }
 
     return dispatch => {
-	    axios.defaults.headers = { 'Content-Type': 'application/json' };
+
         axios.post('/user/register', { email, pwd, type, firstName, lastName }).then(res => {
         
             if (res.status === 200 && res.data.code === 0) {

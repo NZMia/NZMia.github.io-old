@@ -1,6 +1,6 @@
 
 export function getRedirectPath ({type}) {
 
-	const url = (type === 'Visitor') ? '/profile' : '/admin';
+	const url = (type === 'Visitor') ? '/achieve' : '/admin';
 	return url;
 }

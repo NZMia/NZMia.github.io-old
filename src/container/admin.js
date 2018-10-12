@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import SideBar from '../components/sideBar';
 
 class Admin extends Component {
 
@@ -19,8 +20,10 @@ class Admin extends Component {
 
     render() {
         return (
-            <div className="page-admin site-content">
-               <p>admin</p>
+            <div className="page-admin site-content flex flex-spaceBetween">
+	            <div className="sideBar-wrapper component-width-1">
+		            <SideBar />
+	            </div>
             </div>
         )
     }

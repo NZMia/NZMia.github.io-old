@@ -19,17 +19,16 @@ Router.get('/list', function (req, res) {
 
 Router.post('/login', function (req, res) {
 
-	const { email, pwd } = req.body;
+	const { email, pwd, type } = req.body;
 
-	console.log(req);
-	// user.findOne({email, pwd: setEncryption(pwd), function(err, doc){
-	// 	if(!doc) {
-	// 		return res.json({code:1,msg:'Email or Password got error'})
-	// 	}
-	// 	return res.json({code:0,data:doc});
-	// }})
+	user.findOne({email:email, pwd:setEncryption(pwd), type:type}, function(err, doc){
+
+		if(!doc) {
+			return res.json({code:1,msg:'Invalid user, please check the input data'})
+		}
+		return res.json({code:0,data:doc});
+	})
 });
-
 
 Router.post('/register', function (req, res) {
     const { email, pwd, type, firstName, lastName } = req.body;
