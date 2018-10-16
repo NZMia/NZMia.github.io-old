@@ -8,16 +8,11 @@ import thunk from 'redux-thunk';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faHeart, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-import Header from './components/header';
-import NavBar from './components/navBar';
-import Footer from './components/footer';
 import Home from './container/home';
 import Login from './container/login';
 import Register from './container/register';
 import Admin from "./container/admin";
-import Achieve from './container/achieve';
 
-import { routes } from './router/router';
 import reducers from './reduxs/index.redux';
 
 import Auth from './utils/auth';
@@ -38,21 +33,13 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <HashRouter>
-                    <section className="main-content">
-                        <NavBar />
-                        <div className="main-content-wrapper">
-                            <Header name={"Redux"} />
-
-                            <Route path='/' exact component={Home}></Route>
-                            <Route path='/user' exact component={Auth}></Route>
-	                        <Route path='/achieve' component={Achieve}></Route>
-                            <Route path='/login' component={Login}></Route>
-                            <Route path='/admin' component={Admin}></Route>
-                            <Route path='/register' component={Register}></Route>
-
-                            <Footer />
-                        </div>
-                    </section>
+	                <div>
+		                <Route path='/' exact component={Home}></Route>
+	                    <Route path='/login' component={Login}></Route>
+		                <Route path='/admin' component={Admin}></Route>
+		                <Route path='/auth' component={Auth}></Route>
+	                    <Route path='/register' component={Register}></Route>
+	                </div>
                 </HashRouter>
             </Provider>
         )

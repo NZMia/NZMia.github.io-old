@@ -11,7 +11,7 @@ export const routes = [
         requiresAuth: false,
     },
     {
-        path: '/user',
+        path: '/admin',
         name: 'Auth',
         component: Auth,
         requiresAuth: true,

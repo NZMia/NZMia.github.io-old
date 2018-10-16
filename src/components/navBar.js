@@ -48,7 +48,7 @@ class NavBar extends Component {
 		            <Link to='/'>Home</Link>
 	            </li>
 				<li>
-		            <Link to='/user'>Admin</Link>
+		            <Link to='/auth'>Admin</Link>
 	            </li>
             </nav>
         )

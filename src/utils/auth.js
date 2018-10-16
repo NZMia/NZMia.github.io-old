@@ -1,33 +1,41 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-
+import React, {Component} from 'react';
 import axios from 'axios';
+import {loading_one} from "../reduxs/admin.redux";
+import { Redirect, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 @withRouter
+@connect (
+	state => state.admin_reducer,
+	{loading_one}
+)
+
 class Auth extends Component {
 
-    componentDidMount() {
-        const publicRouter = ['/login', '/register'];
+	constructor(...args) {
+		super(...args);
+	}
 
-        const pathName = this.props.location.pathname;
-        if (!(publicRouter.indexOf(pathName) != -1)) {
+	componentDidMount() {
+		console.log( this.props.location.pathname)
+		axios.get('/user/info').
+			then(res=>{
+			console.log(res.data);
+				if (res.status==200) {
+					if (res.data.code==0) {
 
-            axios.get('/user/info').then(res => {
-                if(res.status==200) {
+						this.props.loading_one(res.data.data)
+						this.props.history.push('/admin')
+					}else{
+						this.props.history.push('/login')
+					}
+				}
+			})
+	}
 
-                    if(res.data.code === 0) {
-
-                    }else {
-                        this.props.history.push('/login');
-                    }
-                }
-            })
-        }
-    }
-
-    render() {
-        return null
-    }
+	render() {
+		return null
+	}
 }
 
 export default Auth;

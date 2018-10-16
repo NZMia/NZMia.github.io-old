@@ -4,6 +4,10 @@ import { Select, Input, Icon, Button } from 'antd';
 import { connect } from 'react-redux';
 import { register_action } from "../reduxs/user.redux";
 
+import Header from '../components/header';
+import NavBar from '../components/navBar';
+import Footer from '../components/footer';
+
 @connect(
     state => state.user_reducer,
     { register_action }
@@ -38,7 +42,10 @@ class Register extends Component {
 
     render() {
         return (
-            <div className="auth-page site-content flex flex-center">
+	        <section className="main-content">
+                <NavBar />
+                <Header name={"Redux"} />
+                <div className="auth-page site-content flex flex-center">
 	            {this.props.redirectTo? <Redirect to={this.props.redirectTo} />:null}
                 <div className="auth-wrapper">
                     <Input.Group>
@@ -89,6 +96,8 @@ class Register extends Component {
                     </div>
                 </div>
             </div>
+		        <Footer />
+	        </section>
         )
     }
 }

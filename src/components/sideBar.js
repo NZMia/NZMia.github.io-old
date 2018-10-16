@@ -1,57 +1,65 @@
 import React, { Component } from 'react'
-import {  Menu, Icon, Button } from 'antd';
+import { Menu, Icon, Switch } from 'antd';
+import { Link } from "react-router-dom";
 
-const SubMenu = Menu.SubMenu;
 class SideBar extends Component {
 
 	constructor(...args) {
 		super(...args);
 		this.state = {
 			collapsed: false,
+			theme: 'dark',
 		}
+		this.changeTheme = this.changeTheme.bind(this);
 	}
+
+	changeTheme = (value) => {
+		this.setState({
+			theme: value ? 'dark' : 'light',
+		});
+	};
 
 	render() {
 		return (
-			<div className="sideBar-component">
-				<Menu
-					defaultSelectedKeys={['1']}
-					defaultOpenKeys={['sub1']}
-					mode="inline"
-					theme="dark"
-					inlineCollapsed={this.state.collapsed}>
+			<Menu className="sideBar-component"
+			      defaultSelectedKeys={['1']}
+			      defaultOpenKeys={['sub1']}
+			      mode="inline"
+			      theme={this.state.theme}
+			      inlineCollapsed={this.state.collapsed}>
 
-					<Menu.Item key="1">
-		                <Icon type="pie-chart" />
-		                <span>Option 1</span>
-		            </Menu.Item>
+				<Menu.Item key='/'>
+	                <Icon type="pie-chart" />
+	                <span>Home</span>
+					<Link to="/" />
+	            </Menu.Item>
 
-		            <Menu.Item key="2">
-			            <Icon type="desktop" />
-			            <span>Option 2</span>
-		            </Menu.Item>
+	            <Menu.Item key={`${this.props.url}/users`}>
+		            <Icon type="desktop" />
+		            <span>Users</span>
+		            <Link to={`${this.props.url}/users`} />
+	            </Menu.Item>
 
-		            <Menu.Item key="3">
-			            <Icon type="inbox" />
-			            <span>Option 3</span>
-		            </Menu.Item>
+	            <Menu.Item key={`${this.props.url}/articles`}>
+		            <Icon type="inbox" />
+		            <span>Articles</span>
+		            <Link to={`${this.props.url}/articles`} />
+	            </Menu.Item>
 
-		            <SubMenu key="sub1"
-		                     title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
+				<Menu.Item key={`${this.props.url}/tags`}>
+		            <Icon type="inbox" />
+		            <span>Tags</span>
+					<Link to={`${this.props.url}/tags`} />
+	            </Menu.Item>
 
-			            <Menu.Item key="5">Option 5</Menu.Item>
-		                <Menu.Item key="6">Option 6</Menu.Item>
-		                <Menu.Item key="7">Option 7</Menu.Item>
-		                <Menu.Item key="8">Option 8</Menu.Item>
-		            </SubMenu>
+				<li>
+					<Switch checkedChildren="dark"
+					        unCheckedChildren="light"
+					        onChange={this.changeTheme}
+					        defaultChecked> Change Theme </Switch>
+				</li>
 
-		            <SubMenu key="sub2"
-		                     title={<span><Icon type="appstore" /><span>Navigation Two</span></span>}>
-		                <Menu.Item key="9">Option 9</Menu.Item>
-		                <Menu.Item key="10">Option 10</Menu.Item>
-		          </SubMenu>
-		        </Menu>
-			</div>
+	        </Menu>
 		)
 	}
 }
