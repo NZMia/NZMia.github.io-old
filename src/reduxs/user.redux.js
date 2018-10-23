@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { getRedirectPath } from "../utils/redirect";
 
-const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+const AUTH_SUCCESS = "AUTH_SUCCESS";
 const ERROR_MSG = "ERROR_MSG";
-const LOAD_DATA = "LOAD_DATA";
+
+const USERS = "USERS";
+const USER_CURRENT = "USER_CURRENT";
+const USER_SELECTED = "USER_SELECTED";
+const UPDATE = "UPDATE";
 
 const initState = {
 	redirectTo:'',
@@ -13,13 +16,17 @@ const initState = {
 	email: " ",
 	firstName: " ",
 	lastName: " ",
-	type: " "
+	type: " ",
+	isActive: true,
+	userList: [],
+	currentUser:[],
+	selectedUser:[]
 };
 
 export function user_reducer(state=initState , action) {
 
 	switch (action.type) {
-		case REGISTER_SUCCESS:
+		case AUTH_SUCCESS:
 			return {
 				...state,
 				msg: '',
@@ -27,18 +34,22 @@ export function user_reducer(state=initState , action) {
 				isAuth: true,
 				...action.payload
 			};
-		case LOGIN_SUCCESS:
+		case USER_CURRENT:
 			return {
 				...state,
-				msg: '',
-				redirectTo: getRedirectPath(action.payload),
 				isAuth: true,
-				...action.payload
+				currentUser: action.payload
 			};
-		case LOAD_DATA:
+		case USER_SELECTED:
 			return {
 				...state,
-				...action.payload
+				redirectTo: action.url,
+				selectedUser: action.payload
+			};
+		case USERS:
+			return {
+				...state,
+				userList: action.payload
 			};
 		case ERROR_MSG:
 			return {
@@ -55,14 +66,24 @@ export function errorMsg(msg) {
 	return { msg, type: ERROR_MSG };
 }
 
-export function loginSuccess(data) {
-	return { type: LOGIN_SUCCESS, payload: data }
+export function authSuccess(obj) {
+	const{pwd, ...data} = obj;
+	return { type: AUTH_SUCCESS, payload: data }
 }
 
-export function registerSuccess(data) {
-	return { type: REGISTER_SUCCESS, payload: data }
+export function user(data) {
+	return { type: USERS, payload: data }
 }
 
+export function user_current(data) {
+	return { type: USER_CURRENT, payload: data }
+}
+
+export function user_selected(data, url) {
+	return { type: USER_SELECTED, payload: data, url:url }
+}
+
+// Actions
 export function login_action({ email, pwd, type }) {
 
 	if(!email || !pwd || !type) {
@@ -75,7 +96,7 @@ export function login_action({ email, pwd, type }) {
 
 			if(res.status === 200 && res.data.code === 0) {
 
-				dispatch(loginSuccess({email, pwd, type}));
+				dispatch(authSuccess({email, pwd, type}));
 			}else {
 
 				dispatch(errorMsg(res.data.msg));
@@ -86,7 +107,7 @@ export function login_action({ email, pwd, type }) {
 	}
 }
 
-export function register_action({ email, pwd, rePwd, type, firstName, lastName }) {
+export function register_action({ email, pwd, rePwd, type, firstName,lastName }) {
 
 	if (!email || !pwd || !type || !firstName || !lastName) {
 		return errorMsg("Please fill in ALL fields");
@@ -101,10 +122,50 @@ export function register_action({ email, pwd, rePwd, type, firstName, lastName }
 		axios.post('/user/register', { email, pwd, type, firstName, lastName }).then(res => {
 
 			if (res.status === 200 && res.data.code === 0) {
-				dispatch(registerSuccess({ email, pwd, type, firstName, lastName }));
+				dispatch(authSuccess({ email, pwd, type, firstName, lastName }));
 			} else {
 				dispatch(errorMsg(res.data.msg))
 			}
 		})
 	}
+}
+
+export function users_action() {
+
+	return  (dispatch) => {
+
+		axios.get('/user/list').then(res => {
+			if(res.status === 200 && res.data.code === 0) {
+				dispatch(user(res.data.data));
+			}
+		});
+	}
+}
+
+export function user_current_action() {
+
+	return dispatch => {
+		axios.get('/user/info').then(res=>{
+			if(res.status === 200 && res.data.code === 0) {
+				dispatch(user_current(res.data.data));
+			}
+		})
+	}
+
+}
+
+export function update_action(data) {
+
+	return dispatch => {
+
+		axios.post('/user/update', data).then(res => {
+			console.log(res);
+			// if (res.status === 200 && res.data.code === 0) {
+			// 	dispatch(authSuccess(res.data.data));
+			// }else {
+			// 	dispatch(errorMsg(res.data.msg))
+			// }
+		})
+	}
+
 }

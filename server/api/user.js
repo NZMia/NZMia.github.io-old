@@ -35,7 +35,7 @@ Router.post('/login', function (req, res) {
 
 Router.post('/register', function (req, res) {
     const { email, pwd, type, firstName, lastName } = req.body;
-
+	const createdAt = new Date();
     user.findOne({email:email},function(err,doc) {
 
         if (doc) {
@@ -43,7 +43,8 @@ Router.post('/register', function (req, res) {
             return res.json({code:1,msg:'User exists'})
 
         } else  {
-        	const newUser = new user({email, pwd:setEncryption(pwd), type, firstName, lastName});
+        	const newUser = new user({email, pwd:setEncryption(pwd), type, firstName, lastName, isActive:true, createdAt: createdAt});
+
 	        newUser.save(function (error, doc) {
                 if (error) {
                     return res.json({code: 1, msg: 'backend got wrong'})
@@ -59,13 +60,14 @@ Router.post('/register', function (req, res) {
 });
 
 Router.post('/update', function (req, res) {
+	console.log(req.body);
+	const userId = req.cookies._userId;
 
 });
 
 Router.get('/info', function (req, res) {
 
 	const userId = req.cookies._userId;
-
 	if(!userId) {
 		return res.json({ code: 1 })
 	}
@@ -75,7 +77,6 @@ Router.get('/info', function (req, res) {
 			return res.json({code:1, msg:'BE GOT ERROR'})
 		}
 		return res.json({code:0,data:doc});
-
 	})
 
 });
