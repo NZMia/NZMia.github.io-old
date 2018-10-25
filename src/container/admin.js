@@ -111,9 +111,8 @@ class Admin extends Component {
 			                       render={(props) => <Lists {...props}  myData={this.props.userList} handleShow={this.handShowItem} />} />
 	                }
 
-
 		            <Route path={`${this.props.match.url}/articles`}
-		                   component={Markdown}/>
+		                   component={Markdown} />
 
 		            <Route path={`${this.props.match.url}/tags`}
 		                   render={(props) => <Lists {...props} myData={'go to tags'}/>} />

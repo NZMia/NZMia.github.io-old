@@ -2,6 +2,7 @@ const mongoDB = require('mongoose');
 const dbURL = 'mongodb://localhost:27017/blog';
 mongoDB.connect(dbURL, { useNewUrlParser: true });
 mongoDB.set('useCreateIndex', true);
+mongoDB.set('useFindAndModify', false);
 
 mongoDB.connection.on('connected', function () {
 
@@ -9,3 +10,4 @@ mongoDB.connection.on('connected', function () {
 });
 
 module.exports = mongoDB;
+

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getRedirectPath } from "../utils/redirect";
+import '../router/axiosConfig';
 
 const AUTH_SUCCESS = "AUTH_SUCCESS";
 const ERROR_MSG = "ERROR_MSG";
@@ -80,7 +81,8 @@ export function user_current(data) {
 }
 
 export function user_selected(data, url) {
-	return { type: USER_SELECTED, payload: data, url:url }
+	const path = url || false;
+	return { type: USER_SELECTED, payload: data, url:path }
 }
 
 // Actions
@@ -159,12 +161,12 @@ export function update_action(data) {
 	return dispatch => {
 
 		axios.post('/user/update', data).then(res => {
-			console.log(res);
-			// if (res.status === 200 && res.data.code === 0) {
-			// 	dispatch(authSuccess(res.data.data));
-			// }else {
-			// 	dispatch(errorMsg(res.data.msg))
-			// }
+
+			if (res.status === 200 && res.data.code === 0) {
+				dispatch(user_selected(res.data.data));
+			}else {
+				dispatch(errorMsg(res.data.msg))
+			}
 		})
 	}
 

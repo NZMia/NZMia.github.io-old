@@ -11,7 +11,7 @@ const models = {
 	    createdAt: {type: String},
 	    updatedAt: {type: String},
 	    updatedBy: {type: String},
-	    avatar:{type: String}
+	    avatar: {type: String}
 
     },
     chat: {

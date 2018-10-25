@@ -12,7 +12,7 @@ class AdminDetails extends Component {
 	constructor(...args) {
 		super(...args);
 		this.state = {
-			_id: this.props._id,
+			_id: this.props.myData._id,
 			type: this.props.myData.type,
 			firstName: this.props.myData.firstName,
 			lastName: this.props.myData.lastName,
@@ -30,10 +30,11 @@ class AdminDetails extends Component {
 	}
 
 	handleChange(key, val) {
-		console.log(val.target.value);
+
 		this.setState({
 			[key]: val.target.value
-		})
+		});
+
 	}
 
 	handleSubmit() {
