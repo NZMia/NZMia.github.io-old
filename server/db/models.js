@@ -14,8 +14,8 @@ const models = {
 	    avatar: {type: String}
 
     },
-    chat: {
-
+    tag: {
+		tag: {type: String}
     },
     blog: {
 

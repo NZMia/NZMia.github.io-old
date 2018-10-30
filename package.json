@@ -10,7 +10,7 @@
     "predeploy": "npm run start",
     "deploy": "gh-pages -d dist",
     "dll": "rimraf dll && cross-env NODE_ENV=development webpack -p --config ./configs/webpack.dll.config.js",
-    "start": "cross-env NODE_ENV=development node bin/start",
+    "start": "cross-env NODE_ENV=production node bin/start",
     "build": "npm run clean && cross-env NODE_ENV=development node ./bin/build.js",
     "prod": "npm run clean && cross-env NODE_ENV=production node ./bin/build.js",
     "server": "node server/index.js",
@@ -91,6 +91,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
+    "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "serve-favicon": "^2.5.0",
     "utility": "^1.15.0"

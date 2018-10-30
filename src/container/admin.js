@@ -28,6 +28,7 @@ class Admin extends Component {
 
 	    this.changeTheme = this.changeTheme.bind(this);
 	    this.handShowItem = this.handShowItem.bind(this);
+	    console.log(localStorage.getItem('current_user'));
     }
 
 	changeTheme = (value) => {
@@ -41,11 +42,16 @@ class Admin extends Component {
 
     componentDidMount() {
 	    this.props.users_action();
-	    this.props.user_current_action();
     }
 
     handShowItem(target, url) {
 	    this.props.user_selected(target, url);
+
+	    const current_user = localStorage.getItem('current_user');
+
+	    // if(this.props.projectList.size === 0 && current_user) {
+	    //
+	    // }
     }
 
     handleUpdate(e) {
@@ -59,9 +65,7 @@ class Admin extends Component {
     render() {
 	    return (
 		    <div className="page-admin site-content flex flex-spaceBetween">
-			    {this.props.redirectTo?
-				    <Redirect to={`${this.props.match.url}/users/update`} />:null}
-
+			    {this.props.redirectTo? <Redirect to={`${this.props.match.url}/users/update`} />:null}
 			    <div className="sideBar-wrapper component-width-1">
 
 				    <Menu className="sideBar-component"

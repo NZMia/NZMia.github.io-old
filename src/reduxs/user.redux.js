@@ -146,24 +146,57 @@ export function users_action() {
 
 export function user_current_action() {
 
+	const publicList = ['/login','/admin'];
+	const pathname = this.location.pathname;
+
+	if (publicList.indexOf(pathname)>-1) {
+		return null
+	}
+
+	console.log(this.localStorage);
 	return dispatch => {
+
 		axios.get('/user/info').then(res=>{
-			if(res.status === 200 && res.data.code === 0) {
-				dispatch(user_current(res.data.data));
+
+			if (res.status === 200) {
+
+				if( res.data.code === 0 ) {
+
+					this.history.push('/admin');
+					dispatch(user_current(res.data.data));
+				}else {
+					this.history.push('/login')
+				}
 			}
 		})
 	}
 
 }
 
+// export function update_action(data) {
+//
+// 	return dispatch => {
+//
+// 		axios.post('/user/update?id='+data._id, data).then(res => {
+//
+// 			if (res.status === 200 && res.data.code === 0) {
+// 				dispatch(user_selected(res.data.data));
+// 			}else {
+// 				dispatch(errorMsg(res.data.msg))
+// 			}
+// 		})
+// 	}
+//
+// }
+
 export function update_action(data) {
 
 	return dispatch => {
 
-		axios.post('/user/update', data).then(res => {
+		axios.post('/user/update?id='+data._id, data).then(res => {
 
 			if (res.status === 200 && res.data.code === 0) {
-				dispatch(user_selected(res.data.data));
+				dispatch(authSuccess(res.data.data));
 			}else {
 				dispatch(errorMsg(res.data.msg))
 			}

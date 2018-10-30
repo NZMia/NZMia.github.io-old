@@ -59,9 +59,10 @@ Router.post('/register', function (req, res) {
 
 });
 
-Router.get('/info', function (req, res) {
+Router.all('/info', function (req, res) {
 
 	const userId = req.cookies._userId;
+
 	if(!userId) {
 		return res.json({ code: 1 })
 	}
@@ -80,19 +81,18 @@ Router.post('/update', function (req, res) {
 	const updateBy = req.cookies._userId;
 	const updateAt =  new Date();
 	const data = req.body;
-	console.log(updateAt);
+
 	data['updatedAt'] = updateAt;
 	data['updatedBy'] = updateBy;
 
 	if (!updateBy) {
 		return json.dumps({code: 1})
 	}else {
-		user.findByIdAndUpdate(data._id, {$set: data}, {upsert:true}, function (err,data) {
+		user.findByIdAndUpdate(data._id, {$set: data}, { new: true }, function (err,data) {
 
 			if(err) {
 				return res.json({code:1,msg:'Update failed: error comes from BE'})
 			}
-
 			return res.json({code:0,data});
 
 		});

@@ -12,10 +12,23 @@ class Auth extends Component {
 	}
 
 	componentDidMount() {
+		const publicList = ['/login','/admin'];
+		const pathname = this.props.location.pathname;
+
+		if (publicList.indexOf(pathname)>-1) {
+			return null
+		}
+
 		axios.get('/user/info').then(res=>{
+
 			if (res.status === 200) {
 
-				res.data.code === 0 ? this.props.history.push('/admin') : this.props.history.push('/login');
+				if( res.data.code === 0 ) {
+
+					this.props.history.push('/admin');
+				}else {
+					this.props.history.push('/login')
+				}
 			}
 		})
 	}
