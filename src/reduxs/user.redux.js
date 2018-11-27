@@ -1,6 +1,7 @@
+
+
 import axios from 'axios';
 import { getRedirectPath } from "../utils/redirect";
-import '../router/axiosConfig';
 
 const AUTH_SUCCESS = "AUTH_SUCCESS";
 const ERROR_MSG = "ERROR_MSG";
@@ -153,7 +154,6 @@ export function user_current_action() {
 		return null
 	}
 
-	console.log(this.localStorage);
 	return dispatch => {
 
 		axios.get('/user/info').then(res=>{

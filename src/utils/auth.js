@@ -3,7 +3,14 @@ import axios from 'axios';
 import { Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { get_me } from "../reduxs/me.redux";
+
 @withRouter
+
+@connect (
+	state => state.me,
+	{ get_me }
+)
 
 class Auth extends Component {
 
@@ -19,18 +26,7 @@ class Auth extends Component {
 			return null
 		}
 
-		axios.get('/user/info').then(res=>{
-
-			if (res.status === 200) {
-
-				if( res.data.code === 0 ) {
-
-					this.props.history.push('/admin');
-				}else {
-					this.props.history.push('/login')
-				}
-			}
-		})
+		this.props.get_me();
 	}
 
 	render() {

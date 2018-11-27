@@ -11,11 +11,14 @@ import AdminDetails from '../components/admin-component/details';
 
 import { admin } from "../router/routers";
 
+// @connect (
+// 	state => state.user_reducer,
+// 	{ users_action, user_current_action, user_selected }
+// )
 @connect (
-	state => state.user_reducer,
+	state => state.user_reduce,
 	{ users_action, user_current_action, user_selected }
 )
-
 class Admin extends Component {
 
     constructor(...args) {

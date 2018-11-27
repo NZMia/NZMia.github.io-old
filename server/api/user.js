@@ -36,6 +36,7 @@ Router.post('/login', function (req, res) {
 Router.post('/register', function (req, res) {
     const { email, pwd, type, firstName, lastName } = req.body;
 	const createdAt = new Date();
+
     user.findOne({email:email},function(err,doc) {
 
         if (doc) {
@@ -75,6 +76,7 @@ Router.all('/info', function (req, res) {
 	})
 
 });
+
 
 Router.post('/update', function (req, res) {
 
