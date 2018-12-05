@@ -1,7 +1,7 @@
 import Home from '../container/home';
 import NotFound from '../container/notFound';
 
-import Auth from '../utils/auth';
+import Auth from '../container/auth';
 export const routes = [
     {
         path: '/',

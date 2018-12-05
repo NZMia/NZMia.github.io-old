@@ -2,17 +2,16 @@ import React, {Component} from 'react';
 import { Redirect } from 'react-router-dom';
 import { Select, Input, Icon, Button } from 'antd';
 import { connect } from 'react-redux';
-import { login_action } from "../reduxs/user.redux";
+import { get_login } from "../reduxs/me.redux";
 
 import Header from '../components/header';
 import NavBar from '../components/navBar';
 import Footer from '../components/footer';
 
 @connect (
-    state=>state.user_reducer,
-    { login_action }
+	state => state.me,
+	{ get_login }
 )
-
 class Login extends Component {
 
     constructor(...args) {
@@ -25,6 +24,8 @@ class Login extends Component {
 	    this.handleRegister = this.handleRegister.bind(this);
 	    this.handleLogin = this.handleLogin.bind(this);
 	    this.handleChange = this.handleChange.bind(this);
+	    console.log('get login');
+	    console.log(this.props.matchUrl);
     }
 
 
@@ -33,7 +34,8 @@ class Login extends Component {
     }
 
     handleLogin() {
-	    this.props.login_action(this.state);
+    	console.log(this.state);
+	    this.props.get_login(this.state);
     }
 
     handleChange(key, val) {
@@ -48,8 +50,8 @@ class Login extends Component {
                 <NavBar />
                 <Header name={"Redux"} />
 	            <div className="auth-page site-content flex flex-center">
-					{this.props.redirectTo? <Redirect to={this.props.redirectTo} />:null}
-	                <div className="auth-wrapper">
+					{/*{this.props.redirectTo? <Redirect to={this.props.redirectTo} />:null}*/}
+	               {/* <div className="auth-wrapper">
 		                {
 			                this.props.msg ? <p className='error-msg' style={{ color: '#f50' }}>{this.props.msg}</p> : null
 		                }
@@ -82,7 +84,7 @@ class Login extends Component {
 	                            Sign Up
 	                        </Button>
 	                    </div>
-	                </div>
+	                </div>*/}
 	            </div>
 		        <Footer />
 	        </section>

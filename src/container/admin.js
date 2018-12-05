@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { users_action, user_current_action, user_selected } from "../reduxs/user.redux";
+import { get_me } from "../reduxs/me.redux";
 import {Link, Route, Redirect} from "react-router-dom";
 
 import { Menu, Icon, Switch, Avatar } from 'antd';
 
+import Cookies from 'js-cookie';
 import Markdown from '../components/markdownAare';
 import Lists from '../components/list';
 import AdminDetails from '../components/admin-component/details';
 
 import { admin } from "../router/routers";
 
-// @connect (
-// 	state => state.user_reducer,
-// 	{ users_action, user_current_action, user_selected }
-// )
 @connect (
-	state => state.user_reduce,
-	{ users_action, user_current_action, user_selected }
+	state => state.me,
+	{ get_me },
 )
+
 class Admin extends Component {
 
     constructor(...args) {
@@ -27,11 +26,11 @@ class Admin extends Component {
 	    this.state = {
 		    collapsed: false,
 		    theme: 'dark',
+		    userId:/\"(.*?)\"/.exec(Cookies.get('_userId'))[1]
 	    };
 
 	    this.changeTheme = this.changeTheme.bind(this);
 	    this.handShowItem = this.handShowItem.bind(this);
-	    console.log(localStorage.getItem('current_user'));
     }
 
 	changeTheme = (value) => {
@@ -41,16 +40,21 @@ class Admin extends Component {
 	};
 
     componentWillMount() {
+	    console.log(typeof this.state.userId);
+	    console.log(this.state.userId);
+
+	    this.props.get_me(this.state.userId);
     }
 
     componentDidMount() {
-	    this.props.users_action();
+	    console.log('did update');
+	    //this.props.users_action();
     }
 
     handShowItem(target, url) {
-	    this.props.user_selected(target, url);
+	    // this.props.user_selected(target, url);
 
-	    const current_user = localStorage.getItem('current_user');
+	    //const current_user = localStorage.getItem('current_user');
 
 	    // if(this.props.projectList.size === 0 && current_user) {
 	    //

@@ -10,11 +10,13 @@ const _filter = {'pwd': 0, '__v': 0};
 const currentDate = new Date();
 
 function setEncryption(pwd) {
-	const salt = 'mia@zhang!&+2316#~~~~salt';
+	const salt = 'wanying@zhang_is_good!&&+16zwyj0203#~~~';
 	return encryption.md5(encryption.md5(pwd+salt));
 }
 
 Router.post('/register', function (req, res) {
+	console.log('--------register---------');
+	console.log(req.body);sss
 	const { email, pwd, type, firstName, lastName } = req.body;
 
 	user.findOne({email: email}, function (err, doc) {
@@ -38,10 +40,11 @@ Router.post('/register', function (req, res) {
 
 });
 
-Router.post('login', function (req, res) {
+Router.post('/login', function (req, res) {
 
 	const { email, pwd, type } = req.body;
-
+	console.log('--------login---------');
+	console.log(req.body);
 	user.findOne({email:email, pwd:setEncryption(pwd), type:type}, _filter, function (err, doc) {
 		if (!doc) {
 			return res.json({code: 1, msg: 'Invalid email or password'});

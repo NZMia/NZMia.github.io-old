@@ -7,13 +7,16 @@ const initalState = {
 	type: '',
 	isActive: '',
 	avatar: '',
-	msg: ''
+	msg: '',
+	hasAuth: false,
+	hasCookies: false
 };
 
 export const actiontType = {
 
 	ERROR_MSG: 'ERROR_MSG',
-	AUTH_SUCCESS: 'AUTH_SUCCESS'
+	AUTH_SUCCESS: 'AUTH_SUCCESS',
+	COOKIES_SUCCESS: 'COOKIES_SUCCESS'
 };
 
 export const actions = {
@@ -23,7 +26,10 @@ export const actions = {
 	},
 
 	get_user: function (obj) {
-		console.log(obj);
+		return {type: actiontType.COOKIES_SUCCESS, payload: obj};
+	},
+
+	set_user: function (obj) {
 		const {pwd, ...data} = obj;
 		return {type: actiontType.AUTH_SUCCESS, payload: data};
 	}
@@ -34,18 +40,24 @@ export function me(state = initalState, action) {
 		case actiontType.ERROR_MSG:
 			return {
 				...state,
-				isActive: false,
+				hasAuth: false,
 				msg: action.msg
 			};
 
 		case actiontType.AUTH_SUCCESS:
 			return {
 				...state,
-				isActive: true,
-				msg: '',
+				hasAuth: true,
 				...action.payload
-
 			};
+
+		case actiontType.COOKIES_SUCCESS:
+			return {
+				...state,
+				hasCookies: true,
+				...action.payload
+			};
+
 		default:
 			return state;
 
@@ -53,20 +65,14 @@ export function me(state = initalState, action) {
 }
 
 export function get_me(id) {
-	const _id  = id ? id: '';
+	const _id  = id ? '/' + id: '';
 
 	return dispatch => {
-		axios.get('me/'+ _id).then(res => {
+		axios.get('me'+ _id).then(res => {
 
-			if (res.status === 200) {
+			if (res.status === 200 && res.data.code === 0) {
 
-				if( res.data.code === 0 ) {
-					dispatch(actions.get_user(res.data.data));
-					this.history.push('/admin');
-				} else {
-
-					this.history.push('/login');
-				}
+				dispatch(actions.get_user(res.data.data));
 			}else {
 				dispatch(actions.get_errorMsg(res.data.msg));
 			}
@@ -74,7 +80,8 @@ export function get_me(id) {
 	}
 }
 
-export function get_register (obj) {
+export function set_register (obj) {
+
 	if(!obj.email || !obj.firstName || !obj.type) {
 		return actions.get_errorMsg('Please fill in required fields');
 	}
@@ -90,14 +97,16 @@ export function get_register (obj) {
 	}
 }
 
-export function get_login (obj) {
+export function set_login (obj) {
+
 	if (!obj.email || !obj.pwd || !obj.type) {
 		return actions.get_errorMsg('Please fill in required fields');
 	}
 
 	return dispatch => {
 		axios.post('/me/login', obj).then(res => {
-			res.status === 200 && res.data.code === 0 ? dispatch(actions.get_user) : dispatch(actions.get_errorMsg(res.data.msg));
+			console.log(res);
+			res.status === 200 && res.data.code === 0 ? dispatch(actions.set_user(res.data.data)) : dispatch(actions.get_errorMsg(res.data.msg));
 		})
 	}
 }

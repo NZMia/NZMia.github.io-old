@@ -46,56 +46,55 @@ class Register extends Component {
                 <NavBar />
                 <Header name={"Redux"} />
                 <div className="auth-page site-content flex flex-center">
-	            {this.props.redirectTo? <Redirect to={this.props.redirectTo} />:null}
-                <div className="auth-wrapper">
-                    <Input.Group>
-                        {
-                            this.props.msg ? <p className='error-msg' style={{ color: '#f50' }}>{this.props.msg}</p> : null
-                        }
-                        <Input placeholder="Email"
-                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            onChange={val => this.handleChange('email', val)} />
+	                <div className="auth-wrapper">
+		                <Input.Group>
+	                        {
+	                            this.props.msg ? <p className='error-msg' style={{ color: '#f50' }}>{this.props.msg}</p> : null
+	                        }
+	                        <Input placeholder="Email"
+	                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+	                            onChange={val => this.handleChange('email', val)} />
 
-                        <Input placeholder="First Name"
-                            type="text"
-                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            onChange={val => this.handleChange('firstName', val)} />
+	                        <Input placeholder="First Name"
+	                            type="text"
+	                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+	                            onChange={val => this.handleChange('firstName', val)} />
 
-                        <Input placeholder="Last Name"
-                            type="text"
-                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            onChange={val => this.handleChange('lastName', val)} />
+	                        <Input placeholder="Last Name"
+	                            type="text"
+	                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+	                            onChange={val => this.handleChange('lastName', val)} />
 
-                        <Input placeholder="Password"
-                            type="password"
-                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            onChange={val => this.handleChange('pwd', val)} />
+	                        <Input placeholder="Password"
+	                            type="password"
+	                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+	                            onChange={val => this.handleChange('pwd', val)} />
 
-                        <Input placeholder="Confirm password"
-                            type="password"
-                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            onChange={val => this.handleChange('rePwd', val)} />
+	                        <Input placeholder="Confirm password"
+	                            type="password"
+	                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+	                            onChange={val => this.handleChange('rePwd', val)} />
 
-                    </Input.Group>
+		                </Input.Group>
 
-                    <div className="select-wrapper">
+	                    <div className="select-wrapper">
 
-                        <Select className="flex flex-horizontal-center"
-                            defaultValue="---Select---"
-                            style={{ flex: '1' }}
-                            onChange={val => this.handleChange('type', val)}>
-                            <Select.Option value="Visitor">Visitor</Select.Option>
-                            <Select.Option value="Administrator">Administrator</Select.Option>
-                        </Select>
-                    </div>
+	                        <Select className="flex flex-horizontal-center"
+	                            defaultValue="---Select---"
+	                            style={{ flex: '1' }}
+	                            onChange={val => this.handleChange('type', val)}>
+	                            <Select.Option value="Visitor">Visitor</Select.Option>
+	                            <Select.Option value="Administrator">Administrator</Select.Option>
+	                        </Select>
+	                    </div>
 
-                    <div className="button-wrapper">
-                        <Button type="dashed" onClick={this.handleRegister}>
-                            Sign Up
-                        </Button>
-                    </div>
+	                    <div className="button-wrapper">
+	                        <Button type="dashed" onClick={this.handleRegister}>
+	                            Sign Up
+	                        </Button>
+	                    </div>
+	                </div>
                 </div>
-            </div>
 		        <Footer />
 	        </section>
         )
