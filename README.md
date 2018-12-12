@@ -1,3 +1,5 @@
+12/12/2018: lastest code on develop branch
+
 Personal Project Refactor
 ------
 This is for `react` + `express` + `mongoose` project
