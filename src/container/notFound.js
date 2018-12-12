@@ -12,7 +12,9 @@ class NotFound extends Component {
 
     render() {
         return (
-            <div className="site-content">Not found</div>
+            <div className="site-content">
+               
+            </div>
         )
     }
 }

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import CardFlip from '../components/cardFlip';
-import axios from 'axios';
-// const progressRing = require('../mockData/progressRing');
 import { Button } from 'antd';
 
+import Header from '../components/header';
+import NavBar from '../components/navBar';
+import Footer from '../components/footer';
 
 class Home extends Component {
 
@@ -16,20 +16,6 @@ class Home extends Component {
     }
 
     componentDidMount() {
-	    axios.get('/myAuth').then(res=>{
-		    console.log(res);
-		    // if (res.status===200) {
-		    // 	this.setState({data:res.data})
-		    // }
-	    })
-    }
-    getData = () => {
-	    axios.get('/data')
-		    .then(res => {
-			    if(res.status === 200) {
-			        console.log(res, 'res');
-			    }
-		    })
     }
 
     componentWillMount() {
@@ -43,7 +29,12 @@ class Home extends Component {
     render() {
         return (
             <div className="page-home site-content">
-	            <Button type="dashed">Dash</Button>
+	            <section className="main-content">
+	                <NavBar />
+	                <Header name={"Redux"} />
+		            <Button type="dashed">Dash</Button>
+	                <Footer />
+	            </section>
                 {/*<div className="cardFlip-wrapper flex flex-spaceAround">*/}
                     {/*{*/}
                         {/*Object.keys(progressRing).map((k, i) => {*/}

@@ -1,64 +1,36 @@
 import React from 'react';
 import ReactDOM  from 'react-dom';
-import { HashRouter, BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
+
+import Home from './container/home';
+import Admin from './container/admin';
+import CheckIn from './container/checkIn';
+
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider, connect } from 'react-redux'
 import thunk from 'redux-thunk';
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUser, faHeart, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import RootReducer from './reduxs/index.redux';
 
-import Header from './components/header';
-import NavBar from './components/navBar';
-import Footer from './components/footer';
-import Home from './container/home';
-import Login from './container/login';
-import Register from './container/register';
-import Admin from "./container/admin";
-
-import { routes } from './router/router';
-import reducers from './reduxs/index.redux';
-
-import Auth from './utils/auth';
-import renderRoutes from './router/routerConfig';
-
-import './router/axiosConfig';
+import '../axiosConfig';
 import 'main.scss';
 
-library.add(faUser, faHeart, faArrowRight);
 
-const store = createStore(reducers, compose(
-    applyMiddleware(thunk),
-    window.devToolsExtension? window.devToolsExtension():f=>f
+const store = createStore(RootReducer, compose(
+	applyMiddleware(thunk),
+	window.devToolsExtension? window.devToolsExtension():f=>f
 ));
 
-class App extends React.Component {
-
-    render() {
-        return (
-            <Provider store={store}>
-                <HashRouter>
-                    <section className="main-content">
-                        <NavBar />
-                        <div className="main-content-wrapper">
-                            <Header name={"Redux"} />
-
-                            <Route path='/' exact component={Home}></Route>
-                            <Route path='/user' component={Auth}></Route>
-                            <Route path='/login' component={Login}></Route>
-                            <Route path='/admin' component={Admin}></Route>
-                            <Route path='/register' component={Register}></Route>
-
-                            <Footer />
-                        </div>
-                    </section>
-                </HashRouter>
-            </Provider>
-        )
-    }
-}
-
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+	<Provider store={store}>
+		<HashRouter>
+                <div>
+	                <Route path='/' exact component={Home}></Route>
+					<Route path='/admin' component={Admin}></Route>
+					<Route path='/checkin' component={CheckIn}></Route>
+                </div>
+            </HashRouter>
+	</Provider>, document.getElementById('app'));
 
 if (module.hot) {
     module.hot.accept()

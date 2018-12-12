@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Route, Link } from 'react-router-dom';
-import { routes } from '../router/router';
 
 class NavBar extends Component {
 
@@ -44,13 +43,12 @@ class NavBar extends Component {
     render() {
         return (
             <nav className={'component-nav flex flex-end' + ' ' + this.state.stickyState}>
-                {
-                    routes.map((r, i) => {
-                        return (
-                            r.name != null ?<li key={i}><Link to={r.path}>{r.name}</Link></li> : ""
-                        )
-                    })
-                }
+                <li>
+                    <Link to='/'>Home</Link>
+                </li>
+                <li>
+                    <Link to='/admin'>Admin</Link>
+                </li>
             </nav>
         )
     }

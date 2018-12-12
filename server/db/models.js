@@ -6,10 +6,16 @@ const models = {
         firstName: {type: String, require: true},
         lastName: {type: String, require: true},
         pwd: {type: String, require:true},
-        type: {type: String, require:true}
-    },
-    chat: {
+        type: {type: String, require:true},
+        isActive: {type: Boolean},
+	    createdAt: {type: String},
+	    updatedAt: {type: String},
+	    updatedBy: {type: String},
+	    avatar: {type: String}
 
+    },
+    tag: {
+		tag: {type: String}
     },
     blog: {
 
