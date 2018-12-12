@@ -32,7 +32,7 @@ _The vendor needs to be packaged once when the first time running. Repackage it 
 
 ##### Backend start (port:9091)
 ```
-  nodemon server/server.js 
+  npm run server 
 ```
 ##### Frontend Start (prot: 9090)
 ```
