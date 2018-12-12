@@ -7,11 +7,21 @@ axios.defaults.headers = {
 };
 
 // axios request interceptor
-axios.interceptors.request.use (
-
+axios.interceptors.request.use ((config) =>  {
+		console.log('Start with Ajax');
+		return config
+	}, (error) => {
+		console.log('Error');
+		return Promise.reject(error);
+	}
 );
 
 // axios response interceptor
-axios.interceptors.response.use (
-
+axios.interceptors.response.use ((response) => {
+		console.log('Done with Ajax call');
+		return response;
+	}, (error) =>  {
+		console.log('Error fetching the data');
+		return Promise.reject(error);
+	}
 );

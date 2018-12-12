@@ -15,8 +15,7 @@ function setEncryption(pwd) {
 }
 
 Router.post('/register', function (req, res) {
-	console.log('--------register---------');
-	console.log(req.body);sss
+
 	const { email, pwd, type, firstName, lastName } = req.body;
 
 	user.findOne({email: email}, function (err, doc) {
@@ -31,8 +30,8 @@ Router.post('/register', function (req, res) {
 					return res.json({code: 1, msg: 'Data saved failed'});
 				} else {
 
-					res.cookie('_userId', _id);
-					return res.json({code: 0, date: doc});
+					res.cookie('_userId', doc._id);
+					return res.json({code: 0, data: doc});
 				}
 			})
 		}
@@ -42,10 +41,9 @@ Router.post('/register', function (req, res) {
 
 Router.post('/login', function (req, res) {
 
-	const { email, pwd, type } = req.body;
-	console.log('--------login---------');
-	console.log(req.body);
+	const { email, pwd, type } = req.body; 
 	user.findOne({email:email, pwd:setEncryption(pwd), type:type}, _filter, function (err, doc) {
+	
 		if (!doc) {
 			return res.json({code: 1, msg: 'Invalid email or password'});
 		}
@@ -62,7 +60,7 @@ Router.all('/:id?', function (req, res) {
 	user.findOne({_id: userId}, _filter, function (err, doc) {
 
 		if(!doc) {
-			return res.json({code: 1, msg: 'Session overdue, please re login'})
+			return res.json({code: 1})
 		};
 
 		res.json({code: 0, data: doc})

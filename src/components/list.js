@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { List } from 'antd';
-import {Link, Route, Redirect} from "react-router-dom";
 import { connect } from 'react-redux';
-import { user_selected } from "../reduxs/user.redux";
 
 @connect (
 	state => state.user_reducer,
-	{ user_selected }
 )
 
 class Lists extends Component {
@@ -36,10 +33,6 @@ class Lists extends Component {
 				      dataSource={this.props.myData}
 				      renderItem={item => (
 					      <List.Item actions={[
-
-						      <a onClick={()=>{this.props.user_selected(item, `${this.props.match.url}/update`)}}>
-							      Edit
-						      </a>,
 						      <a onClick={this.props.mySave}>
 							      Deactivatess
 						      </a>

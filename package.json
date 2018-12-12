@@ -13,7 +13,7 @@
     "start": "cross-env NODE_ENV=development node bin/start",
     "build": "npm run clean && cross-env NODE_ENV=development node ./bin/build.js",
     "prod": "npm run clean && cross-env NODE_ENV=production node ./bin/build.js",
-    "server": "node server/index.js",
+    "server": "node server/server.js",
     "clean": "rimraf dist"
   },
   "repository": {

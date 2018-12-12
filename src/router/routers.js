@@ -1,1 +1,1 @@
-export const admin = ['home','users','achieves','tags'];
+export const adminRoute = ['home','users','achieves','tags'];

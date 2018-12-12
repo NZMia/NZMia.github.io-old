@@ -43,12 +43,12 @@ class NavBar extends Component {
     render() {
         return (
             <nav className={'component-nav flex flex-end' + ' ' + this.state.stickyState}>
-	            <li>
-		            <Link to='/'>Home</Link>
-	            </li>
-				<li>
-		            <Link to='/auth'>Admin</Link>
-	            </li>
+                <li>
+                    <Link to='/'>Home</Link>
+                </li>
+                <li>
+                    <Link to='/admin'>Admin</Link>
+                </li>
             </nav>
         )
     }

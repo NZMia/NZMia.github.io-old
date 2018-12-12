@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM  from 'react-dom';
+import { HashRouter, Route } from 'react-router-dom';
+
+import Home from './container/home';
+import Admin from './container/admin';
+import CheckIn from './container/checkIn';
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider, connect } from 'react-redux'
 import thunk from 'redux-thunk';
 
-import RootRouter from './router/index';
 import RootReducer from './reduxs/index.redux';
 
 import '../axiosConfig';
@@ -19,7 +23,13 @@ const store = createStore(RootReducer, compose(
 
 ReactDOM.render(
 	<Provider store={store}>
-		<RootRouter />
+		<HashRouter>
+                <div>
+	                <Route path='/' exact component={Home}></Route>
+					<Route path='/admin' component={Admin}></Route>
+					<Route path='/checkin' component={CheckIn}></Route>
+                </div>
+            </HashRouter>
 	</Provider>, document.getElementById('app'));
 
 if (module.hot) {

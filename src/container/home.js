@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import CardFlip from '../components/cardFlip';
-import axios from 'axios';
 import { Button } from 'antd';
 
 import Header from '../components/header';
