@@ -15,7 +15,11 @@ const models = {
 
     },
     tag: {
-		tag: {type: String}
+        name: {type: String},
+        isActive: {type: Boolean},
+        createdAt: {type: String},
+	    updatedAt: {type: String},
+	    updatedBy: {type: String}
     },
     blog: {
 

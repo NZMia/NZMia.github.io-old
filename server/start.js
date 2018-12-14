@@ -1,5 +1,6 @@
 const express = require('express');
 const webpack = require('webpack');
+const cors = require('cors');
 
 const opn = require('opn');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -17,6 +18,7 @@ var proxy = require('http-proxy-middleware');
 const app = express();
 
 app.use(compress());
+app.use(cors());
 
 const devMiddleware = webpackDevMiddleware(compiler, {
     quiet   : false,

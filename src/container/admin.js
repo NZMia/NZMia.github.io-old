@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { get_me, set_logout } from "../reduxs/me.redux";
-import {Link} from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 
 import { Menu, Icon, Switch, Avatar, Button, Modal } from 'antd';
 
 import Cookies from 'js-cookie';
-import Markdown from '../components/markdownAare';
-import Lists from '../components/list';
-import AdminDetails from '../components/admin-component/details';
-
 import { adminRoute } from "../router/routers";
 import Title from 'antd/lib/skeleton/Avatar';
+
+import Tags from './tags.js';
 
 @connect (
     state => state.me,
@@ -160,11 +158,14 @@ class Admin extends Component {
                                    render={(props) => <Lists {...props}  myData={this.props.userList} handleShow={this.handShowItem} />} />
                     }
 
+
                     <Route path={`${this.props.match.url}/articles`}
                            component={Markdown} />
 
                     <Route path={`${this.props.match.url}/tags`}
                            render={(props) => <Lists {...props} myData={'go to tags'}/>} /> */}
+
+                    <Route path={`${this.props.match.url}/tags`} render={(props) => <Tags {...props} authUser={this.props.userId}/>}></Route>
 
                 </div>
             </div>
