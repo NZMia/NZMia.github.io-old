@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
 import { adminRoute } from "../router/routers";
 import Title from 'antd/lib/skeleton/Avatar';
 
-import Tags from "./Tags-test";
+import Tags from "./tags";
 
 @connect (
     state => state.me,
