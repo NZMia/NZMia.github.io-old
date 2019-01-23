@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
 import { adminRoute } from "../router/routers";
 import Title from 'antd/lib/skeleton/Avatar';
 
-import Tags from './tags.js';
+import Tags from "./Tags-test";
 
 @connect (
     state => state.me,
@@ -107,6 +107,7 @@ class Admin extends Component {
                             <Avatar shape="square" size="large" icon="user" />
                             <p className="text-white">{this.props.firstName}.{this.props.lastName}</p>
                             <p className="text-white">{this.props.type}</p>
+                            <p className="text-white">{this.props.email}</p>
                         </div>
 
                         {
@@ -165,7 +166,7 @@ class Admin extends Component {
                     <Route path={`${this.props.match.url}/tags`}
                            render={(props) => <Lists {...props} myData={'go to tags'}/>} /> */}
 
-                    <Route path={`${this.props.match.url}/tags`} render={(props) => <Tags {...props} authUser={this.props.userId}/>}></Route>
+                    <Route path={`${this.props.match.url}/tags`} render={(props) => <Tags {...props} authUser={this.props.email}/>}></Route>
 
                 </div>
             </div>

@@ -8,7 +8,7 @@ import { format } from 'path';
     state => state.tag,
     { add_tag }
 )
-class Tags extends Component {
+class Tagsss extends Component {
 
     constructor(...args) {
         super(...args);
@@ -65,4 +65,4 @@ class Tags extends Component {
     }
 }
 
-export default Tags;
+export default Tagsss;

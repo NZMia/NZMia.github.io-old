@@ -10,6 +10,7 @@ axios.defaults.headers = {
 // axios request interceptor
 axios.interceptors.request.use ((config) =>  {
 		console.log('Start with Ajax');
+		document.body.classList.add('custom-loader');
 		return config
 	}, (error) => {
 		console.log('Error');
@@ -20,6 +21,7 @@ axios.interceptors.request.use ((config) =>  {
 // axios response interceptor
 axios.interceptors.response.use ((response) => {
 		console.log('Done with Ajax call');
+		document.body.classList.remove('custom-loader');
 		return response;
 	}, (error) =>  {
 		console.log(error);
