@@ -7,7 +7,6 @@ const initalState = {
 }
 
 export const actionType = {
-
     ERROR_MSG: 'ERROR_MSG',
     SUCCESS: 'SUCCESS',
     GET_LIST: 'GET_LIST',

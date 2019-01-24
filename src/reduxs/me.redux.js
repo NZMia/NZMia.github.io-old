@@ -72,27 +72,8 @@ export function me(state = initalState, action) {
     }
 }
 
-export function get_me(id) {
-
-    const _id  = id ? '/' + id: '';
-
-    return dispatch => {
-        axios.get('me'+ _id).then(res => {
-
-            if (res.status === 200 && res.data.code === 0) {
-                dispatch(actions.get_user(res.data.data));
-            }else {
-            
-                this.history.push('/checkin');
-                dispatch(actions.get_errorMsg(res.data.msg));
-            }
-        })
-    }
-}
-
 export function set_register (obj) {
 
-    console.log(obj);
     if(!obj.email || !obj.firstName || !obj.type) {
         return actions.get_errorMsg('Please fill in required fields');
     }
@@ -139,3 +120,21 @@ export function set_login (obj) {
 export function set_logout() {
     return { type: actiontType.LOGOUT}
 }
+
+export function get_me(id) {
+
+    const _id  = id ? '/' + id: '';
+
+    return dispatch => {
+        axios.get('me'+ _id).then(res => {
+
+            if (res.status === 200 && res.data.code === 0) {
+                dispatch(actions.get_user(res.data.data));
+            }else {
+                this.history.push('/checkin');
+                dispatch(actions.get_errorMsg(res.data.msg));
+            }
+        })
+    }
+}
+

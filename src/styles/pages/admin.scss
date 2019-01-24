@@ -3,3 +3,31 @@
 .page-admin {
     height: 100vh;
 }
+.page-admin-users {
+  background: $color_lightGrey;
+  height: 100%;
+  padding: 20px;
+}
+.page-admin-users > .ant-tabs-card > .ant-tabs-content {
+    // height: 120px;
+    margin-top: -16px;
+  }
+  
+  .page-admin-users > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
+    background: #fff;
+    padding: 16px;
+  }
+  
+  .page-admin-users > .ant-tabs-card > .ant-tabs-bar {
+    border-color: #fff;
+  }
+  
+  .page-admin-users > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+    border-color: transparent;
+    background: transparent;
+  }
+  
+  .page-admin-users > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+    border-color: #fff;
+    background: #fff;
+  }

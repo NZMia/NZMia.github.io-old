@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Tag, Input, Icon, Button, Form } from 'antd';
-import { tag, add_tag, get_tags, update_tag } from '../reduxs/tag.redux';
+import { Tag, Input, Icon, Button, Form, Empty } from 'antd';
+import { tag, add_tag, get_tags, update_tag } from '../../reduxs/tag.redux';
 
 import Cookies from 'js-cookie';
+import "antd/dist/antd.css";
 
 @connect(state => state.tag, { add_tag, get_tags, update_tag })
 
@@ -44,7 +45,7 @@ class Tags extends Component {
             <div className='top-content tags-group'>
 
                 {
-                    this.props.tagList ?
+                    this.props.tagList && this.props.tagList.length != 0 ?
                     this.props.tagList.map(item => {
                         return (
                             item.isActive && 
@@ -53,7 +54,7 @@ class Tags extends Component {
                             </Tag>
                         )
                     }):
-                    <Tag>No Data pls add a new one</Tag>
+                    <Empty />
                 }
             </div>
 
@@ -61,7 +62,10 @@ class Tags extends Component {
             <Form className="bottom-content tag-new flex flex-spaceAround">
                 <div className="input-warpper">
 
-                    <Input placeholder="New Tag" style={{ color: 'rgba(0,0,0,.25)', borderStyle: 'dashed' }} prefix={<Icon type="plus" style={{ color: 'rgba(0,0,0,.25)' }} />} onChange={this.handleChange} value={this.state.name} />
+                    <Input placeholder="New Tag"
+                        style={{ color: 'rgba(0,0,0,.25)', borderStyle: 'dashed' }}
+                        prefix={<Icon type="plus" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        onChange={this.handleChange} value={this.state.name} />
                 </div>
                 <div className="input-warpper">
                     <Button onClick={this.handleNewTag}>

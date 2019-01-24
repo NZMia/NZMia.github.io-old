@@ -1,8 +1,5 @@
 const express = require('express');
-const encryption = require('utility');
-
 const Router = express.Router();
-
 const model = require('../db/models');
 const tag = model.getModel('tag');
 
@@ -47,3 +44,4 @@ Router.get('/list', function(req, res) {
 });
 
 module.exports = Router;
+

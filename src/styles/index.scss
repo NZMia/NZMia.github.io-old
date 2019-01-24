@@ -1,17 +1,18 @@
 @import "./components/index.scss";
 @import "./utils/index.scss";
-@import "./pages/home.scss";
-@import "./pages/admin.scss";
+@import "./pages";
+// @import "./pages/home.scss";
+// @import "./pages/admin.scss";
 
 body {
     padding: 0;
     margin: 0;
 }
+
 .custom-loader:before {
     background: #000000;
     content: "";
     position: fixed;
-    
 }
 
 .custom-loader:after {

@@ -16,7 +16,7 @@ import Tags from "./tags";
     { get_me, set_logout },
 )
 
-class Admin extends Component {
+class Adminsss extends Component {
 
     constructor(...args) {
         super(...args);
@@ -30,6 +30,7 @@ class Admin extends Component {
         this.changeTheme = this.changeTheme.bind(this);
         this.handShowItem = this.handShowItem.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
+        console.log(this.props.match.url);
     }
 
     changeTheme = (value) => {
@@ -89,11 +90,10 @@ class Admin extends Component {
         Cookies.remove('_userId', { path: '' });
         this.props.history.push("/");
     }
-    
+
     render() {
         return (
             <div className="page-admin site-content flex flex-spaceBetween">
-                
                 <div className="sideBar-wrapper component-width-1">
 
                     <Menu className="sideBar-component"
@@ -174,5 +174,5 @@ class Admin extends Component {
     }
 }
 
-export default Admin;
+export default Adminsss;
 

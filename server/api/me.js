@@ -41,9 +41,9 @@ Router.post('/register', function (req, res) {
 
 Router.post('/login', function (req, res) {
 
-	const { email, pwd, type } = req.body; 
+	const { email, pwd, type } = req.body;
 	user.findOne({email:email, pwd:setEncryption(pwd), type:type}, _filter, function (err, doc) {
-	
+
 		if (!doc) {
 			return res.json({code: 1, msg: 'Invalid email or password'});
 		}
