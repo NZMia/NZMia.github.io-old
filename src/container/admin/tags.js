@@ -4,7 +4,6 @@ import { Tag, Input, Icon, Button, Form, Empty } from 'antd';
 import { tag, add_tag, get_tags, update_tag } from '../../reduxs/tag.redux';
 
 import Cookies from 'js-cookie';
-import "antd/dist/antd.css";
 
 @connect(state => state.tag, { add_tag, get_tags, update_tag })
 
