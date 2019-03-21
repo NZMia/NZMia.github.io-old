@@ -53,6 +53,15 @@ Router.post('/login', function (req, res) {
 	})
 });
 
+Router.get('/all', function(req, res) {
+	user.find({}, _filter, function(err, docs) {
+		if(!docs) {
+			return res.json({code: 1, msg: err})
+		}
+		res.json({code: 0, data: docs})
+	})
+});
+
 Router.all('/:id?', function (req, res) {
 
 	const userId = typeof (req.params.id) != 'undefined' || req.params.id != null ?  req.params.id : req.cookies._userId;
@@ -66,5 +75,6 @@ Router.all('/:id?', function (req, res) {
 		res.json({code: 0, data: doc})
 	})
 });
+
 
 module.exports = Router;

@@ -6,11 +6,12 @@ import { Route, Link } from "react-router-dom";
 import { Menu, Icon, Switch, Avatar, Button, Modal } from 'antd';
 
 import Cookies from 'js-cookie';
-import { adminRoute } from "../../router/routers";
+import { adminRoute, adminRoutes } from "../../router/routers";
 import Title from 'antd/lib/skeleton/Avatar';
 
 import Tags from "./tags";
 import Users from "./users";
+import Blogs  from './blogs';
 
 @connect (
     state => state.me,
@@ -36,15 +37,14 @@ class Admin extends Component {
 
     changeTheme = (value) => {
         this.setState({
-            theme: value ? 'dark' : 'light',
+          theme: value ? 'dark' : 'light',
         });
     };
 
     /**
      * is Auth Check
-     * 
      * if none cookies record, redirect to login page then.
-     */ 
+     */
     componentWillMount() {
         this.props.get_me(this.state.userId);
     }
@@ -111,7 +111,7 @@ class Admin extends Component {
                             <p className="text-white">{this.props.email}</p>
                         </div>
 
-                        {
+                        {/* {
                             adminRoute.map(item => {
                                 return (
                                     <Menu.Item key={`${item}` != "home" ?`${this.props.match.url}/${item}` : '/'}>
@@ -119,6 +119,31 @@ class Admin extends Component {
                                         <span>{item}</span>
                                         <Link to={`${item}` != "home" ? `${this.props.match.url}/${item}` : '/'} />
                                     </Menu.Item>
+                                )
+                            })
+                        } */}
+                        {
+                            adminRoutes.map((item) => {
+                                return (
+                                    typeof(item.subTitle) == 'undefined' && item.subTitle == null
+                                    ?   <Menu.Item key={`${item.title}` != "home" ? `${this.props.match.url}/${item.title}` : '/'}>
+                                            <Icon type="pie-chart" />
+                                            <span>{item.title}</span>
+                                            <Link to={`${item.title}` != "home" ? `${this.props.match.url}/${item.title}` : '/'} />
+                                        </Menu.Item>
+                                    :   <Menu.SubMenu title={ <span>{item.title}<Link to={`${item.title}` != "home" ? `${this.props.match.url}/${item.title}` : '/'} /></span> }>
+                                            {
+                                                item.subTitle.map(subtitle=> {
+                                                    return(
+                                                        <Menu.Item key={`${this.props.match.url}/${item.title}/${subtitle}`}>
+                                                            <Icon type="pie-chart" />
+                                                            <span>{subtitle}</span>
+                                                            <Link to={`${this.props.match.url}/${item.title}/${subtitle}`} />
+                                                        </Menu.Item>
+                                                    )
+                                                })
+                                            }
+                                        </Menu.SubMenu>
                                 )
                             })
                         }
@@ -169,7 +194,7 @@ class Admin extends Component {
 
                     <Route path={`${this.props.match.url}/users`} render={(props) => <Users {...props} authUser={this.props.email}/>}></Route>
                     <Route path={`${this.props.match.url}/tags`} render={(props) => <Tags {...props} authUser={this.props.email}/>}></Route>
-
+                    <Route path={`${this.props.match.url}/blogs`} render={(props) => <Blogs {...props} authUser={this.props.email}/>}></Route>
                 </div>
             </div>
         )

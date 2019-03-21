@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Tabs } from 'antd';
-
+import { me, get_all} from '../../reduxs/me.redux';
 const TabPane = Tabs.TabPane;
+
+@connect(state => state.me, { get_all })
+
 
 class Users extends Component {
     constructor(...args) {
@@ -10,8 +13,12 @@ class Users extends Component {
         this.state = {
 
         };
+        console.log(this.props);
     }
 
+    componentWillMount() {
+        this.props.get_all();
+    }
     render() {
         return (
             <div className="page-admin-users">

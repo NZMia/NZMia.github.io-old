@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Tag, Input, Icon, Button, Form, Empty } from 'antd';
+import { Tag, Input, Icon, Button, Form } from 'antd';
 import { tag, add_tag, get_tags, update_tag } from '../../reduxs/tag.redux';
 
 import Cookies from 'js-cookie';
@@ -47,13 +47,13 @@ class Tags extends Component {
                     this.props.tagList && this.props.tagList.length != 0 ?
                     this.props.tagList.map(item => {
                         return (
-                            item.isActive && 
+                            item.isActive &&
                             <Tag closable afterClose={() => this.handleTogClose(item)}>
                                 { item.name }
                             </Tag>
                         )
                     }):
-                    <Empty />
+                    <p> no data </p>
                 }
             </div>
 

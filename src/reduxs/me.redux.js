@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import { actionType } from './tag.redux';
 
 const initalState = {
     email: '',
@@ -35,6 +36,10 @@ export const actions = {
     set_user: function (obj) {
         const { pwd, ...data } = obj;
         return { type: actiontType.AUTH_SUCCESS, payload: data };
+    },
+
+    get_users: function (obj) {
+        return { type: actiontType.AUTH_SUCCESS, payload: obj};
     }
 };
 
@@ -138,3 +143,15 @@ export function get_me(id) {
     }
 }
 
+export function get_all() {
+    return dispatch => {
+        axios.get('me/all').then(res => {
+            console.log(res);
+            if (res.status === 200 && res.data.code === 0) {
+                dispatch(actions.get_users(res.data.data));
+            }else {
+                dispatch(actions.get_errorMsg(res.msg));
+            }
+        })
+    }
+}
