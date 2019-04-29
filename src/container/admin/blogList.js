@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
     Button, Menu, Dropdown, Icon,
   } from 'antd';
-import TestButton from '../../components/testButton';
+
 const menu = (
     <Menu onClick={handleMenuClick}>
       <Menu.Item key="1">1st item</Menu.Item>

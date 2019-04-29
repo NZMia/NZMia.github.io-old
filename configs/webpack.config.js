@@ -1,3 +1,4 @@
+
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -92,7 +93,7 @@ const config = {
                     {
                         loader : 'css-loader',
                         options: {
-                            minimize: envDev? false : true
+                            // minimize: envDev? false : true
                         }
                     },
                     {

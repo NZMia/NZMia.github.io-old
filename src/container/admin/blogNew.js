@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
 import {
-    Form, Select, InputNumber, Switch, Radio,
-    Slider, Button, Upload, Icon, Rate, Checkbox,
-    Row, Col,
-  } from 'antd';
+    Form, Select, Button, Upload, Icon, Rate, Input
+} from 'antd';
+import BraftEditor from 'braft-editor'
+import 'braft-editor/dist/index.css'
+
 const { Option } = Select;
+
 class BlogNew extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            editorState: BraftEditor.createEditorState(null)
+        }
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange = (editorState) => {
+        this.setState({ editorState })
+      }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -15,6 +29,12 @@ class BlogNew extends Component {
         });
     }
 
+    editorLanguage = (languages, context) => {
+        if (context === 'braft-editor') {
+            languages.en.controls.clear = 'clear'
+            return languages.en
+          }
+    }
     normFile = (e) => {
         console.log('Upload event:', e);
         if (Array.isArray(e)) {
@@ -26,7 +46,20 @@ class BlogNew extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
-            <Form  onSubmit={this.handleSubmit}>
+            <Form onSubmit={this.handleSubmit}>
+                <Form.Item
+                    label="Title"
+                    >
+                    {getFieldDecorator('email', {
+                        rules: [{
+                        type: 'email', message: 'The input is not valid E-mail!',
+                        }, {
+                        required: true, message: 'Please input your E-mail!',
+                        }],
+                    })(
+                        <Input />
+                    )}
+                </Form.Item>
                 <Form.Item label="Select[multiple]">
                     {getFieldDecorator('select-multiple', {
                         rules: [
@@ -40,7 +73,12 @@ class BlogNew extends Component {
                         </Select>
                     )}
                 </Form.Item>
-
+                <Form.Item label="Content">
+                    <BraftEditor
+                    value={this.state.editorState}
+                    onChange={this.handleChange}
+                    language={this.editorLanguage}/>
+                </Form.Item>
                 <Form.Item label="Rate">
                     {getFieldDecorator('rate', {
                         initialValue: 3.5,

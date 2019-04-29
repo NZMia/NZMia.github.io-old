@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route} from "react-router-dom";
 import BlogNew from './blogNew';
 import BlogList from './blogList';
-
+ 
 class Blogs extends Component {
 
     render() {

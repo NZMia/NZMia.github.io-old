@@ -13,7 +13,7 @@ class NotFound extends Component {
     render() {
         return (
             <div className="site-content">
-               
+
             </div>
         )
     }
