@@ -8,6 +8,13 @@
   height: 100%;
   padding: 20px;
 }
+.content-wrapper {
+  overflow: scroll;
+  margin: 20px;
+  .bf-container {
+    border: 2px solid $color_lightGrey;
+  }
+}
 .page-admin-users > .ant-tabs-card > .ant-tabs-content {
     // height: 120px;
     margin-top: -16px;

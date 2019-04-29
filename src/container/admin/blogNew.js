@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
     Form, Select, Button, Upload, Icon, Rate, Input
 } from 'antd';
+import { tag, get_tags } from '../../reduxs/tag.redux';
 import BraftEditor from 'braft-editor'
 import 'braft-editor/dist/index.css'
-
 const { Option } = Select;
+
+@connect(state => state.tag, { get_tags })
 
 class BlogNew extends Component {
     constructor(props) {
@@ -14,6 +17,10 @@ class BlogNew extends Component {
             editorState: BraftEditor.createEditorState(null)
         }
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentWillMount() {
+        this.props.get_tags();
     }
 
     handleChange = (editorState) => {
@@ -35,6 +42,7 @@ class BlogNew extends Component {
             return languages.en
           }
     }
+
     normFile = (e) => {
         console.log('Upload event:', e);
         if (Array.isArray(e)) {
@@ -47,9 +55,7 @@ class BlogNew extends Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <Form onSubmit={this.handleSubmit}>
-                <Form.Item
-                    label="Title"
-                    >
+                <Form.Item label="Title">
                     {getFieldDecorator('email', {
                         rules: [{
                         type: 'email', message: 'The input is not valid E-mail!',
@@ -57,7 +63,7 @@ class BlogNew extends Component {
                         required: true, message: 'Please input your E-mail!',
                         }],
                     })(
-                        <Input />
+                    <Input />
                     )}
                 </Form.Item>
                 <Form.Item label="Select[multiple]">
@@ -67,17 +73,31 @@ class BlogNew extends Component {
                         ],
                     })(
                         <Select mode="multiple" placeholder="Please select favourite colors">
-                        <Option value="red">Red</Option>
-                        <Option value="green">Green</Option>
-                        <Option value="blue">Blue</Option>
+                            {
+                                this.props.tagList && this.props.tagList.length != 0 &&
+                                this.props.tagList.map(item => {
+                                    return (
+                                        item.isActive &&
+                                        <Option value={item.name}>
+                                            { item.name }
+                                        </Option>
+                                    )
+                                })
+                            }
                         </Select>
                     )}
                 </Form.Item>
                 <Form.Item label="Content">
-                    <BraftEditor
-                    value={this.state.editorState}
-                    onChange={this.handleChange}
-                    language={this.editorLanguage}/>
+                    {getFieldDecorator('content', {
+                       rules: [
+                        { required: true },
+                        ],
+                    })(
+                        <BraftEditor
+                            value={this.state.editorState}
+                            onChange={this.handleChange}
+                            language={this.editorLanguage}/>
+                    )}
                 </Form.Item>
                 <Form.Item label="Rate">
                     {getFieldDecorator('rate', {
@@ -97,7 +117,7 @@ class BlogNew extends Component {
                     })(
                     <Upload.Dragger name="files" action="/upload.do">
                         <p className="ant-upload-drag-icon">
-                        <Icon type="inbox" />
+                            <Icon type="inbox" />
                         </p>
                         <p className="ant-upload-text">Click or drag file to this area to upload</p>
                         <p className="ant-upload-hint">Support for a single or bulk upload.</p>
